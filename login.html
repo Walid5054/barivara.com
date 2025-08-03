@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Barivara</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <style>
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to bottom right, #dbeafe, #93c5fd),
+          url("https://cdn.pixabay.com/photo/2017/08/06/11/40/house-2593597_1280.png");
+        background-blend-mode: overlay;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        opacity: 0.95;
+        z-index: -1;
+        animation: backgroundFade 12s infinite alternate;
+      }
+
+      @keyframes backgroundFade {
+        0% {
+          filter: hue-rotate(0deg);
+        }
+        100% {
+          filter: hue-rotate(25deg);
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-transparent">
+    <div
+      class="min-h-screen flex flex-col items-center justify-center px-4"
+      x-data="{ showPassword: false, role: 'user' }"
+    >
+      <!-- Barivara Logo and Role Toggle -->
+      <div class="text-center mb-6">
+        <h1 class="text-4xl font-bold text-blue-800 mb-2">Barivara.com</h1>
+        <div class="flex gap-4 justify-center">
+          <button
+            @click="role = 'user'"
+            :class="role === 'user' ? 'bg-blue-600 text-white' : 'bg-white border'"
+            class="px-4 py-2 rounded shadow"
+          >
+            User Login
+          </button>
+          <button
+            @click="role = 'owner'"
+            :class="role === 'owner' ? 'bg-blue-600 text-white' : 'bg-white border'"
+            class="px-4 py-2 rounded shadow"
+          >
+            Owner Login
+          </button>
+        </div>
+      </div>
+
+      <div
+        class="w-full max-w-md bg-white/90 backdrop-blur-md shadow-xl rounded-lg p-8"
+      >
+        <h2
+          class="text-2xl font-bold text-center text-gray-800 mb-6"
+          x-text="role === 'user' ? 'User Login' : 'Owner Login'"
+        ></h2>
+
+        <form @submit.prevent class="space-y-4">
+          <input
+            type="email"
+            placeholder="Email"
+            class="w-full border rounded px-4 py-2 focus:ring-2 focus:ring-blue-400"
+            required
+          />
+
+          <div class="relative">
+            <input
+              :type="showPassword ? 'text' : 'password'"
+              placeholder="Password"
+              class="w-full border rounded px-4 py-2 focus:ring-2 focus:ring-blue-400"
+              required
+            />
+            <button
+              type="button"
+              @click="showPassword = !showPassword"
+              class="absolute right-3 top-2 text-sm text-gray-500"
+            >
+              👁️
+            </button>
+          </div>
+
+          <div class="flex justify-between items-center text-sm text-gray-600">
+            <label class="flex items-center gap-2">
+              <input type="checkbox" /> Remember Me
+            </label>
+            <a href="#" class="text-blue-600 hover:underline"
+              >Forgot Password?</a
+            >
+          </div>
+
+          <button
+            class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+          >
+            Login
+          </button>
+        </form>
+
+        <p class="mt-4 text-center text-sm text-gray-600">
+          Don't have an account?
+          <a href="/register" class="text-blue-600 hover:underline"
+            >Register here</a
+          >
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

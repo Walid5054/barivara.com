@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register - Barivara</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <style>
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to bottom right, #e0f2fe, #93c5fd),
+          url("https://cdn.pixabay.com/photo/2016/10/22/19/11/family-1761279_1280.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-blend-mode: overlay;
+        opacity: 0.95;
+        z-index: -1;
+        animation: bgCycle 12s infinite alternate;
+      }
+
+      @keyframes bgCycle {
+        0% {
+          filter: brightness(1);
+        }
+        100% {
+          filter: brightness(1.05);
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-transparent">
+    <div
+      class="min-h-screen flex flex-col items-center justify-center px-4"
+      x-data="{ role: 'user' }"
+    >
+      <!-- Header & Role Toggle -->
+      <div class="text-center mb-6">
+        <h1 class="text-4xl font-bold text-blue-800 mb-2">
+          Register at Barivara.com
+        </h1>
+        <div class="flex gap-4 justify-center">
+          <button
+            @click="role = 'user'"
+            :class="role === 'user' ? 'bg-blue-600 text-white' : 'bg-white border'"
+            class="px-4 py-2 rounded shadow"
+          >
+            Register as User
+          </button>
+          <button
+            @click="role = 'owner'"
+            :class="role === 'owner' ? 'bg-blue-600 text-white' : 'bg-white border'"
+            class="px-4 py-2 rounded shadow"
+          >
+            Register as Owner
+          </button>
+        </div>
+      </div>
+
+      <!-- Registration Form -->
+      <div
+        class="w-full max-w-2xl bg-white/90 backdrop-blur-md shadow-xl rounded-lg p-8"
+      >
+        <h2
+          class="text-2xl font-bold text-center text-gray-800 mb-6"
+          x-text="role === 'user' ? 'User Registration' : 'Owner Registration'"
+        ></h2>
+
+        <form @submit.prevent class="space-y-4">
+          <input
+            type="text"
+            placeholder="Full Name"
+            class="w-full border rounded px-4 py-2 focus:ring-2 focus:ring-blue-400"
+            required
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            class="w-full border rounded px-4 py-2 focus:ring-2 focus:ring-blue-400"
+            required
+          />
+
+          <template x-if="role === 'user'">
+            <input
+              type="text"
+              placeholder="Address"
+              class="w-full border rounded px-4 py-2 focus:ring-2 focus:ring-blue-400"
+              required
+            />
+          </template>
+
+          <input
+            type="password"
+            placeholder="Password"
+            class="w-full border rounded px-4 py-2 focus:ring-2 focus:ring-blue-400"
+            required
+          />
+
+          <template x-if="role === 'user'">
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              class="w-full border rounded px-4 py-2 focus:ring-2 focus:ring-blue-400"
+              required
+            />
+          </template>
+
+          <!-- Owner-specific fields -->
+          <template x-if="role === 'owner'">
+            <div class="space-y-3">
+              <input
+                type="text"
+                placeholder="Home Title"
+                class="w-full border rounded px-4 py-2"
+                required
+              />
+              <input
+                type="text"
+                placeholder="Location"
+                class="w-full border rounded px-4 py-2"
+                required
+              />
+              <textarea
+                placeholder="Home Description"
+                class="w-full border rounded px-4 py-2"
+                rows="3"
+                required
+              ></textarea>
+              <div>
+                <label class="block text-sm text-gray-600 mb-1">Want to:</label>
+                <div class="flex gap-4">
+                  <label class="flex items-center gap-2">
+                    <input
+                      type="radio"
+                      name="type"
+                      value="rent"
+                      class="text-blue-500"
+                      required
+                    />
+                    Rent
+                  </label>
+                  <label class="flex items-center gap-2">
+                    <input
+                      type="radio"
+                      name="type"
+                      value="sell"
+                      class="text-blue-500"
+                      required
+                    />
+                    Sell
+                  </label>
+                </div>
+              </div>
+            </div>
+          </template>
+
+          <!-- Terms and Conditions -->
+          <template x-if="role === 'user'">
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" required />
+              I agree to the
+              <a href="#" class="text-blue-600 hover:underline"
+                >Terms & Conditions</a
+              >
+            </label>
+          </template>
+
+          <button
+            class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+          >
+            Register
+          </button>
+        </form>
+
+        <p class="mt-4 text-center text-sm text-gray-600">
+          Already have an account?
+          <a href="/login" class="text-blue-600 hover:underline">Login here</a>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
