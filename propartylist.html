@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Property Listings - Barivara</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        overflow-x: hidden;
+      }
+      .scroll-container {
+        display: flex;
+        gap: 1rem;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        padding-bottom: 1rem;
+        scrollbar-width: none;
+      }
+      .scroll-container::-webkit-scrollbar {
+        display: none;
+      }
+      .scroll-button {
+        background-color: #3b82f6;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 9999px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        cursor: pointer;
+        opacity: 0.9;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 text-gray-800">
+    <header class="bg-white shadow sticky top-0 z-10">
+      <div
+        class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between"
+      >
+        <h1 class="text-xl font-bold text-blue-700">Barivara.com</h1>
+        <nav class="flex-1 text-center space-x-6 text-sm">
+          <a href="/" class="hover:text-blue-600">Home</a>
+          <a href="/service" class="hover:text-blue-600">Service</a>
+          <a href="/property" class="text-blue-600 font-semibold">Property</a>
+          <a href="/contact" class="hover:text-blue-600">Contact</a>
+        </nav>
+        <div>
+          <img
+            src="https://i.pravatar.cc/36"
+            alt="Profile"
+            class="rounded-full w-9 h-9 border border-blue-600"
+          />
+        </div>
+      </div>
+    </header>
+
+    <section class="bg-blue-50 py-12 text-center">
+      <h2 class="text-4xl font-bold mb-2">
+        Discover The Best <span class="text-blue-600">Properties</span> Near You
+      </h2>
+      <p class="text-gray-600 max-w-xl mx-auto">
+        Find top-rated properties available for rent or sale. Perfect for
+        students, families, and investors alike!
+      </p>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-4 py-6">
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <div class="flex gap-2 flex-wrap">
+          <select class="border px-3 py-2 rounded text-sm">
+            <option>All Areas</option>
+            <option>Gulshan</option>
+            <option>Dhanmondi</option>
+          </select>
+          <select class="border px-3 py-2 rounded text-sm">
+            <option>All Types</option>
+            <option>Rent</option>
+            <option>Sale</option>
+          </select>
+          <select class="border px-3 py-2 rounded text-sm">
+            <option>All Prices</option>
+            <option>৳10k–30k</option>
+            <option>৳30k–60k</option>
+          </select>
+        </div>
+        <input
+          type="text"
+          placeholder="Search properties..."
+          class="border rounded px-4 py-2 w-60 text-sm"
+        />
+      </div>
+
+      <div class="space-y-16">
+        <div class="relative">
+          <h3 class="text-2xl font-semibold mb-4">Top Properties</h3>
+          <button
+            onclick="scrollContainer('top-properties', -1)"
+            class="scroll-button left-2"
+          >
+            ❮
+          </button>
+          <div id="top-properties" class="scroll-container pl-12 pr-12"></div>
+          <button
+            onclick="scrollContainer('top-properties', 1)"
+            class="scroll-button right-2"
+          >
+            ❯
+          </button>
+        </div>
+
+        <div class="relative">
+          <h3 class="text-2xl font-semibold mb-4">On Sale</h3>
+          <button
+            onclick="scrollContainer('on-sale', -1)"
+            class="scroll-button left-2"
+          >
+            ❮
+          </button>
+          <div id="on-sale" class="scroll-container pl-12 pr-12"></div>
+          <button
+            onclick="scrollContainer('on-sale', 1)"
+            class="scroll-button right-2"
+          >
+            ❯
+          </button>
+        </div>
+
+        <div class="relative">
+          <h3 class="text-2xl font-semibold mb-4">Student Rentals</h3>
+          <button
+            onclick="scrollContainer('student-rentals', -1)"
+            class="scroll-button left-2"
+          >
+            ❮
+          </button>
+          <div id="student-rentals" class="scroll-container pl-12 pr-12"></div>
+          <button
+            onclick="scrollContainer('student-rentals', 1)"
+            class="scroll-button right-2"
+          >
+            ❯
+          </button>
+        </div>
+
+        <div class="relative">
+          <h3 class="text-2xl font-semibold mb-4">Special Offers</h3>
+          <button
+            onclick="scrollContainer('special-offers', -1)"
+            class="scroll-button left-2"
+          >
+            ❮
+          </button>
+          <div id="special-offers" class="scroll-container pl-12 pr-12"></div>
+          <button
+            onclick="scrollContainer('special-offers', 1)"
+            class="scroll-button right-2"
+          >
+            ❯
+          </button>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-semibold mb-4">Others</h3>
+          <div
+            id="others"
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+          ></div>
+        </div>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
