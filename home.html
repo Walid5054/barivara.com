@@ -36,9 +36,10 @@
       <!-- Desktop Menu -->
       <nav class="hidden md:flex space-x-6 text-gray-700 font-medium">
         <a href="#" class="hover:text-orange-500 transition">Home</a>
-        <a href="#" class="hover:text-orange-500 transition">Service</a>
-        <a href="#" class="hover:text-orange-500 transition">Property</a>
-        <a href="#" class="hover:text-orange-500 transition">Contact</a>
+         <a href="propartylist.html" class="hover:text-orange-500 transition">Property</a>
+        <a href="service.html" class="hover:text-orange-500 transition">Service</a>
+       
+        <a href="#" class="hover:text-orange-500 transition">Real Estate</a>
       </nav>
 
       <!-- Mobile Menu Button -->
@@ -78,9 +79,9 @@
       >
         <ul class="flex flex-col px-4 py-4 space-y-2 text-gray-700 font-medium">
           <li><a href="#">Home</a></li>
-          <li><a href="#">Service</a></li>
           <li><a href="#">Property</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="#">Real Estate</a></li>
+          <li><a href="#">Service</a></li>
           <li>
             <button
               class="w-full text-left bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
@@ -141,10 +142,12 @@
 
       <!-- House Image -->
       <div>
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/619/619034.png"
-          class="w-full max-w-sm mx-auto"
-        />
+ <!-- Replace the hero image -->
+<img
+  src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=700&q=80"
+  class="w-full max-w-2xl mx-auto rounded-lg shadow"
+/>
+
       </div>
     </section>
 
@@ -171,10 +174,15 @@
               class="bg-white border hover:shadow-xl transition rounded-lg overflow-hidden"
             >
               <div class="relative">
-                <img
-                  src="https://source.unsplash.com/400x250/?interior,home"
-                  class="w-full h-48 object-cover"
-                />
+            <img
+  :src="[
+    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=700&q=80',
+    'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=700&q=80',
+    'https://images.unsplash.com/photo-1600607681009-05b3e2e55c2d?auto=format&fit=crop&w=700&q=80'
+  ][index]"
+  class="w-full h-48 object-cover"
+/>
+
                 <span
                   class="absolute top-2 right-2 bg-blue-500 text-white text-xs px-3 py-1 rounded-full"
                   >Featured</span
@@ -296,6 +304,7 @@
     <!-- Right Image -->
     <div class="hidden lg:block w-1/4">
       <img src="https://cdn-icons-png.flaticon.com/512/2965/2965567.png" alt="Engineer Graphic" class="w-full h-auto object-contain" />
+
     </div>
   </div>
 </section>

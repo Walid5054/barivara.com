@@ -34,10 +34,11 @@
       <div
         class="relative overflow-hidden rounded-xl shadow-lg mb-8"
         x-data="{ current: 0, images: [
-        'https://source.unsplash.com/800x500/?apartment',
-        'https://source.unsplash.com/800x500/?livingroom',
-        'https://source.unsplash.com/800x500/?bedroom',
-        'https://source.unsplash.com/800x500/?kitchen'] }"
+  'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1350&q=80',
+  'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1350&q=80',
+  'https://images.unsplash.com/photo-1600573473524-4ee6f3cbd7db?auto=format&fit=crop&w=1350&q=80',
+  'https://images.unsplash.com/photo-1599423300746-b62533397364?auto=format&fit=crop&w=1350&q=80'
+]}"
       >
         <div
           class="flex transition-transform duration-700"
@@ -86,16 +87,86 @@
         <!-- Call to Action -->
         <div class="bg-white p-6 rounded-lg shadow-lg space-y-4">
           <h3 class="text-xl font-semibold">Interested?</h3>
+
           <button
             class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
           >
             Request Visit
           </button>
+
           <button
             class="w-full border border-blue-600 text-blue-600 py-2 rounded hover:bg-blue-50 transition"
           >
             Call for Details
           </button>
+          <!-- New: Chat with Owner -->
+          <!-- Chat Modal -->
+          <div x-data="{ openChat: false }" class="relative">
+            <!-- Chat Button -->
+            <button
+              @click="openChat = true"
+              class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition"
+            >
+              💬 Chat with Owner
+            </button>
+
+            <!-- Modal Overlay -->
+            <div
+              x-show="openChat"
+              class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50"
+            >
+              <!-- Modal Box -->
+              <div
+                @click.away="openChat = false"
+                class="bg-white rounded-lg shadow-lg w-full max-w-md p-6 space-y-4"
+              >
+                <div class="flex justify-between items-center mb-2">
+                  <h3 class="text-lg font-bold">Live Chat</h3>
+                  <button
+                    @click="openChat = false"
+                    class="text-gray-500 hover:text-red-500"
+                  >
+                    ✖
+                  </button>
+                </div>
+
+                <div
+                  class="h-48 overflow-y-auto border rounded p-2 text-sm text-gray-600 space-y-2 bg-gray-50"
+                >
+                  <div>
+                    <strong>Owner:</strong> Hello! How can I assist you?
+                  </div>
+                  <!-- Sample user message -->
+                  <div>
+                    <strong>You:</strong> Is this apartment still available?
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-2">
+                  <input
+                    type="text"
+                    placeholder="Type your message..."
+                    class="flex-1 border rounded px-3 py-2 text-sm"
+                  />
+                  <button
+                    class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 text-sm"
+                  >
+                    Send
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- New: See Property Video -->
+          <a
+            href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID"
+            target="_blank"
+            class="block w-full text-center border text-blue-600 py-2 rounded hover:bg-blue-50 transition"
+          >
+            ▶️ See Property Video
+          </a>
+
           <button
             class="w-full border text-gray-600 py-2 rounded hover:bg-gray-100 transition"
           >
@@ -107,11 +178,15 @@
       <!-- Static Map -->
       <div class="mb-8">
         <h2 class="text-xl font-semibold mb-2">Location</h2>
-        <img
-          src="https://maps.googleapis.com/maps/api/staticmap?center=Gulshan+2,Dhaka&zoom=15&size=700x300&key=YOUR_API_KEY"
-          alt="Map"
-          class="w-full rounded-lg shadow-md"
-        />
+        <iframe
+          src="https://www.google.com/maps?q=Gulshan+2,+Dhaka&output=embed"
+          width="100%"
+          height="300"
+          class="rounded-lg shadow-md border"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
       </div>
 
       <!-- Related Listings -->

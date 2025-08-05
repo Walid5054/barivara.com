@@ -5,58 +5,128 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Property Listings - Barivara</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/alpinejs" defer></script>
     <style>
       body {
         font-family: "Inter", sans-serif;
-        overflow-x: hidden;
+        overflow-x: hidden; /* Prevent horizontal overflow */
       }
+
+      /* Scrollable container styles for horizontal scroll */
       .scroll-container {
         display: flex;
         gap: 1rem;
         overflow-x: auto;
         scroll-behavior: smooth;
         padding-bottom: 1rem;
-        scrollbar-width: none;
+        scrollbar-width: none; /* Firefox */
       }
+
+      /* Hide scrollbars in WebKit browsers */
       .scroll-container::-webkit-scrollbar {
         display: none;
       }
+
+      /* Styling for left/right scroll buttons */
       .scroll-button {
         background-color: #3b82f6;
         color: white;
         padding: 0.5rem 1rem;
         border-radius: 9999px;
         position: absolute;
-        top: 50%;
+        top: 40%;
         transform: translateY(-50%);
-        z-index: 10;
+        z-index: 20;
         cursor: pointer;
         opacity: 0.9;
       }
     </style>
   </head>
   <body class="bg-gray-50 text-gray-800">
-    <header class="bg-white shadow sticky top-0 z-10">
+    <!-- Sticky header with navigation -->
+    <!-- Header -->
+    <header
+      x-data="{ mobileMenu: false }"
+      class="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center relative z-50"
+    >
+      <!-- Logo -->
+      <div class="flex items-center gap-2">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/619/619034.png"
+          class="w-8 h-8"
+          alt="Logo"
+        />
+        <span class="text-orange-600 font-bold text-xl">Barivara.com</span>
+      </div>
+
+      <!-- Desktop Menu -->
+      <nav class="hidden md:flex space-x-6 text-gray-700 font-medium">
+        <a href="#" class="hover:text-orange-500 transition">Home</a>
+        <a href="propartylist.html" class="hover:text-orange-500 transition"
+          >Property</a
+        >
+        <a href="service.html" class="hover:text-orange-500 transition"
+          >Service</a
+        >
+        <a href="#" class="hover:text-orange-500 transition">Real Estate</a>
+      </nav>
+
+      <!-- Desktop Profile Button -->
+      <a href="profile.html" class="hidden md:inline-block">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/847/847969.png"
+          alt="Profile"
+          class="w-8 h-8 rounded-full"
+        />
+      </a>
+
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden">
+        <button
+          @click="mobileMenu = !mobileMenu"
+          class="text-gray-600 focus:outline-none"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-7 w-7"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Dropdown Menu -->
       <div
-        class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between"
+        x-show="mobileMenu"
+        class="absolute top-20 left-0 w-full bg-white border-t shadow-md md:hidden z-50"
+        x-transition
       >
-        <h1 class="text-xl font-bold text-blue-700">Barivara.com</h1>
-        <nav class="flex-1 text-center space-x-6 text-sm">
-          <a href="/" class="hover:text-blue-600">Home</a>
-          <a href="/service" class="hover:text-blue-600">Service</a>
-          <a href="/property" class="text-blue-600 font-semibold">Property</a>
-          <a href="/contact" class="hover:text-blue-600">Contact</a>
-        </nav>
-        <div>
-          <img
-            src="https://i.pravatar.cc/36"
-            alt="Profile"
-            class="rounded-full w-9 h-9 border border-blue-600"
-          />
-        </div>
+        <ul class="flex flex-col px-4 py-4 space-y-2 text-gray-700 font-medium">
+          <li><a href="#" class="block">Home</a></li>
+          <li><a href="propartylist.html" class="block">Property</a></li>
+          <li><a href="service.html" class="block">Service</a></li>
+          <li><a href="#" class="block">Real Estate</a></li>
+          <li>
+            <a
+              href="profile.html"
+              class="block w-full text-left bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+            >
+              Profile
+            </a>
+          </li>
+        </ul>
       </div>
     </header>
 
+    <!-- Intro section with header text -->
     <section class="bg-blue-50 py-12 text-center">
       <h2 class="text-4xl font-bold mb-2">
         Discover The Best <span class="text-blue-600">Properties</span> Near You
@@ -67,25 +137,30 @@
       </p>
     </section>
 
+    <!-- Filters and Search Bar -->
     <section class="max-w-7xl mx-auto px-4 py-6">
       <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
         <div class="flex gap-2 flex-wrap">
+          <!-- Area filter -->
           <select class="border px-3 py-2 rounded text-sm">
             <option>All Areas</option>
             <option>Gulshan</option>
             <option>Dhanmondi</option>
           </select>
+          <!-- Type filter -->
           <select class="border px-3 py-2 rounded text-sm">
             <option>All Types</option>
             <option>Rent</option>
             <option>Sale</option>
           </select>
+          <!-- Price filter -->
           <select class="border px-3 py-2 rounded text-sm">
             <option>All Prices</option>
             <option>৳10k–30k</option>
             <option>৳30k–60k</option>
           </select>
         </div>
+        <!-- Search input -->
         <input
           type="text"
           placeholder="Search properties..."
@@ -93,7 +168,9 @@
         />
       </div>
 
+      <!-- Section for property categories -->
       <div class="space-y-16">
+        <!-- Top Properties Section -->
         <div class="relative">
           <h3 class="text-2xl font-semibold mb-4">Top Properties</h3>
           <button
@@ -102,7 +179,9 @@
           >
             ❮
           </button>
-          <div id="top-properties" class="scroll-container pl-12 pr-12"></div>
+          <div id="top-properties" class="scroll-container pl-12 pr-12">
+            <!-- Top Properties Cards Rendered by JS -->
+          </div>
           <button
             onclick="scrollContainer('top-properties', 1)"
             class="scroll-button right-2"
@@ -111,6 +190,7 @@
           </button>
         </div>
 
+        <!-- On Sale Section -->
         <div class="relative">
           <h3 class="text-2xl font-semibold mb-4">On Sale</h3>
           <button
@@ -119,7 +199,48 @@
           >
             ❮
           </button>
-          <div id="on-sale" class="scroll-container pl-12 pr-12"></div>
+          <div id="on-sale" class="scroll-container pl-12 pr-12">
+            <!-- On Sale Cards -->
+            <div
+              class="bg-white rounded-xl shadow-md w-72 shrink-0 overflow-hidden"
+            >
+              <div class="relative">
+                <img
+                  src="https://source.unsplash.com/400x250/?house,villa"
+                  alt="Property Image"
+                  class="w-full h-48 object-cover"
+                />
+                <span
+                  class="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded"
+                  >For Sale</span
+                >
+                <span
+                  class="absolute top-2 right-2 bg-yellow-400 text-black text-xs px-2 py-1 rounded"
+                  >Hot Deal</span
+                >
+              </div>
+              <div class="p-4 space-y-2">
+                <h4 class="text-lg font-semibold text-gray-800">
+                  Modern Duplex in Dhanmondi
+                </h4>
+                <p class="text-sm text-gray-500">📍 Dhanmondi, Dhaka</p>
+                <div
+                  class="flex items-center justify-between text-xs text-gray-600 mt-2"
+                >
+                  <span>🛏 3 Beds</span>
+                  <span>🛁 2 Baths</span>
+                  <span>📐 1500 sqft</span>
+                </div>
+                <p class="text-blue-600 font-bold text-xl mt-2">৳ 85,00,000</p>
+                <a
+                  href="#"
+                  class="inline-block mt-3 bg-blue-600 text-white text-sm px-4 py-2 rounded hover:bg-blue-700 transition"
+                  >View Details</a
+                >
+              </div>
+            </div>
+            <!-- Add more unique cards here if needed -->
+          </div>
           <button
             onclick="scrollContainer('on-sale', 1)"
             class="scroll-button right-2"
@@ -128,6 +249,7 @@
           </button>
         </div>
 
+        <!-- Student Rentals Section -->
         <div class="relative">
           <h3 class="text-2xl font-semibold mb-4">Student Rentals</h3>
           <button
@@ -136,7 +258,9 @@
           >
             ❮
           </button>
-          <div id="student-rentals" class="scroll-container pl-12 pr-12"></div>
+          <div id="student-rentals" class="scroll-container pl-12 pr-12">
+            <!-- Student Rentals Cards Rendered by JS -->
+          </div>
           <button
             onclick="scrollContainer('student-rentals', 1)"
             class="scroll-button right-2"
@@ -145,6 +269,7 @@
           </button>
         </div>
 
+        <!-- Special Offers Section -->
         <div class="relative">
           <h3 class="text-2xl font-semibold mb-4">Special Offers</h3>
           <button
@@ -153,7 +278,9 @@
           >
             ❮
           </button>
-          <div id="special-offers" class="scroll-container pl-12 pr-12"></div>
+          <div id="special-offers" class="scroll-container pl-12 pr-12">
+            <!-- Special Offers Cards Rendered by JS -->
+          </div>
           <button
             onclick="scrollContainer('special-offers', 1)"
             class="scroll-button right-2"
@@ -162,16 +289,20 @@
           </button>
         </div>
 
+        <!-- Others Section (Grid layout) -->
         <div>
           <h3 class="text-2xl font-semibold mb-4">Others</h3>
           <div
             id="others"
             class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
-          ></div>
+          >
+            <!-- Others Cards Rendered by JS -->
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- External script containing dynamic rendering logic -->
     <script src="script.js"></script>
   </body>
 </html>

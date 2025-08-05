@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  x-data="{ mobileMenu: false }"
+  xmlns="http://www.w3.org/1999/xhtml"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Barivara - Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-gradient-to-br from-white to-blue-50">
+    <!-- Header -->
+    <header
+      class="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center relative z-50"
+    >
+      <div class="flex items-center gap-2">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/619/619034.png"
+          class="w-8 h-8"
+          alt="Barivara Logo"
+        />
+        <span class="text-orange-600 font-bold text-xl">Barivara.com</span>
+      </div>
+
+      <!-- Desktop Menu -->
+      <nav class="hidden md:flex space-x-6 text-gray-700 font-medium">
+        <a href="#" class="hover:text-orange-500 transition">Home</a>
+        <a
+          href="#"
+          class="text-orange-600 font-semibold underline"
+          aria-current="page"
+          >Service</a
+        >
+        <a href="#" class="hover:text-orange-500 transition">Property</a>
+        <a href="#" class="hover:text-orange-500 transition">Contact</a>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden">
+        <button
+          @click="mobileMenu = !mobileMenu"
+          class="text-gray-600 focus:outline-none"
+          aria-label="Toggle menu"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-7 w-7"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Profile Icon instead of Sign In -->
+      <div class="hidden md:flex items-center cursor-pointer">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png"
+          alt="Profile"
+          class="w-9 h-9 rounded-full border-2 border-orange-500 hover:border-orange-600 transition"
+          title="Profile"
+        />
+      </div>
+
+      <!-- Mobile Dropdown -->
+      <div
+        x-show="mobileMenu"
+        x-transition
+        class="absolute top-20 left-0 w-full bg-white border-t shadow-md md:hidden"
+      >
+        <ul class="flex flex-col px-4 py-4 space-y-2 text-gray-700 font-medium">
+          <li><a href="#">Home</a></li>
+          <li>
+            <a href="#" class="text-orange-600 font-semibold underline"
+              >Service</a
+            >
+          </li>
+          <li><a href="#">Property</a></li>
+          <li><a href="#">Contact</a></li>
+          <!-- For mobile, you might want profile/login here -->
+          <li>
+            <a
+              href="#"
+              class="block px-4 py-2 rounded hover:bg-blue-500 hover:text-white transition"
+            >
+              Profile / Sign In
+            </a>
+          </li>
+        </ul>
+      </div>
+    </header>
+
+    <!-- Spacer -->
+    <div class="h-6"></div>
+
+    <!-- Page Title Section -->
+    <section class="max-w-7xl mx-auto px-4 py-16 text-center">
+      <h1 class="text-4xl font-bold text-orange-600 mb-3">Our Services</h1>
+      <p class="text-gray-600 max-w-xl mx-auto">
+        We provide specialized services to help you find the perfect property.
+        From renting homes to student rentals, selling flats, and trusted real
+        estate partnerships.
+      </p>
+    </section>
+
+    <!-- Services Zig-Zag Section -->
+    <!-- Services Zig-Zag Section -->
+    <section class="max-w-7xl mx-auto px-4 space-y-24 pb-24">
+      <!-- Service 1: Renting Homes -->
+      <div
+        class="flex flex-col lg:flex-row items-center gap-10"
+        aria-label="Renting Homes Service"
+      >
+        <div class="lg:w-1/2">
+          <img
+            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+            alt="Renting Homes"
+            class="rounded-lg shadow-lg object-cover w-full max-h-[350px]"
+            loading="lazy"
+          />
+        </div>
+        <div class="lg:w-1/2">
+          <h2 class="text-3xl font-semibold text-orange-600 mb-4">
+            Renting Homes
+          </h2>
+          <p class="text-gray-700 mb-6 leading-relaxed">
+            Find verified rental homes in prime locations with transparent
+            pricing and flexible lease options. We make renting easy, safe, and
+            fast.
+          </p>
+          <a
+            href="#"
+            class="inline-block bg-orange-600 text-white px-8 py-3 rounded-full shadow hover:bg-orange-700 transition"
+            >Explore Renting</a
+          >
+        </div>
+      </div>
+
+      <!-- Service 2: Student Rentals (Reverse Zig-Zag) -->
+      <div
+        class="flex flex-col lg:flex-row-reverse items-center gap-10"
+        aria-label="Student Rentals Service"
+      >
+        <div class="lg:w-1/2">
+          <img
+            src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80"
+            alt="Student Rentals"
+            class="rounded-lg shadow-lg object-cover w-full max-h-[350px]"
+            loading="lazy"
+          />
+        </div>
+        <div class="lg:w-1/2">
+          <h2 class="text-3xl font-semibold text-blue-600 mb-4">
+            Student Rentals
+          </h2>
+          <p class="text-gray-700 mb-6 leading-relaxed">
+            Specially curated affordable, secure, and conveniently located
+            properties for students. Flexible leases and dedicated support
+            ensure your comfort.
+          </p>
+          <a
+            href="#"
+            class="inline-block bg-blue-600 text-white px-8 py-3 rounded-full shadow hover:bg-blue-700 transition"
+            >See Student Rentals</a
+          >
+        </div>
+      </div>
+
+      <!-- Service 3: Selling Properties & Flats -->
+      <div
+        class="flex flex-col lg:flex-row items-center gap-10"
+        aria-label="Selling Properties Service"
+      >
+        <div class="lg:w-1/2">
+          <img
+            src="https://images.unsplash.com/photo-1560185127-cd16415120ab?auto=format&fit=crop&w=800&q=80"
+            alt="Selling Properties"
+            class="rounded-lg shadow-lg object-cover w-full max-h-[350px]"
+            loading="lazy"
+          />
+        </div>
+        <div class="lg:w-1/2">
+          <h2 class="text-3xl font-semibold text-pink-600 mb-4">
+            Selling Properties & Flats
+          </h2>
+          <p class="text-gray-700 mb-6 leading-relaxed">
+            Reach more buyers with our platform. List your property or flat with
+            expert support from start to finish.
+          </p>
+          <a
+            href="#"
+            class="inline-block bg-pink-600 text-white px-8 py-3 rounded-full shadow hover:bg-pink-700 transition"
+            >Start Selling</a
+          >
+        </div>
+      </div>
+
+      <!-- Service 4: Buy Properties (Reverse Zig-Zag) -->
+      <div
+        class="flex flex-col lg:flex-row-reverse items-center gap-10"
+        aria-label="Buying Properties Service"
+      >
+        <div class="lg:w-1/2">
+          <img
+            src="https://images.unsplash.com/photo-1572120360610-d971b9b63939?auto=format&fit=crop&w=800&q=80"
+            alt="Buying Properties"
+            class="rounded-lg shadow-lg object-cover w-full max-h-[350px]"
+            loading="lazy"
+          />
+        </div>
+        <div class="lg:w-1/2">
+          <h2 class="text-3xl font-semibold text-green-600 mb-4">
+            Buy Properties
+          </h2>
+          <p class="text-gray-700 mb-6 leading-relaxed">
+            Explore a wide range of properties for purchase. We provide expert
+            guidance to help you make the best investment.
+          </p>
+          <a
+            href="#"
+            class="inline-block bg-green-600 text-white px-8 py-3 rounded-full shadow hover:bg-green-700 transition"
+            >Browse Properties</a
+          >
+        </div>
+      </div>
+
+      <!-- Service 5: Real Estate Partnership -->
+      <div
+        class="flex flex-col lg:flex-row items-center gap-10"
+        aria-label="Real Estate Partnership Service"
+      >
+        <div class="lg:w-1/2">
+          <img
+            src="https://images.unsplash.com/photo-1501183638714-8f0aed9a36b1?auto=format&fit=crop&w=800&q=80"
+            alt="Real Estate Partnership"
+            class="rounded-lg shadow-lg object-cover w-full max-h-[350px]"
+            loading="lazy"
+          />
+        </div>
+        <div class="lg:w-1/2">
+          <h2 class="text-3xl font-semibold text-gray-700 mb-4">
+            Real Estate Partnership
+          </h2>
+          <p class="text-gray-700 mb-6 leading-relaxed">
+            Grow your business with Barivara’s trusted real estate partnership
+            program. Benefit from expert consulting and new opportunities.
+          </p>
+          <a
+            href="#"
+            class="inline-block bg-gray-700 text-white px-8 py-3 rounded-full shadow hover:bg-gray-800 transition"
+            >Learn More</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 relative z-10">
+      <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-3 gap-10">
+        <div>
+          <h4 class="text-xl font-semibold mb-3">About</h4>
+          <p class="text-sm text-gray-400">
+            We help you find your dream home by offering trusted listings for
+            renting and buying properties across Bangladesh.
+          </p>
+        </div>
+        <div>
+          <h4 class="text-xl font-semibold mb-3">Contact Info</h4>
+          <p class="text-sm text-gray-400">
+            Call Center: +880-555-103-100<br />
+            Email: support@barivara.com<br />
+            Address: Dhanmondi 27, Dhaka<br />
+            Working Hours: 9AM - 6PM
+          </p>
+        </div>
+        <div>
+          <h4 class="text-xl font-semibold mb-3">Information</h4>
+          <ul class="text-sm text-gray-400 space-y-1">
+            <li>
+              <a href="#" class="hover:text-orange-500 transition">Home</a>
+            </li>
+            <li>
+              <a href="#" class="hover:text-orange-500 transition">Service</a>
+            </li>
+            <li>
+              <a href="#" class="hover:text-orange-500 transition">Property</a>
+            </li>
+            <li>
+              <a href="#" class="hover:text-orange-500 transition">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="text-center text-sm text-gray-500 mt-10">
+        All Rights Reserved © Barivara 2025
+      </div>
+    </footer>
+  </body>
+</html>
