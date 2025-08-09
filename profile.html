@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Barivara - User Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      /* Scrollbar for chat */
+      .chat-messages {
+        scrollbar-width: thin;
+        scrollbar-color: #a0aec0 transparent;
+      }
+      .chat-messages::-webkit-scrollbar {
+        width: 6px;
+      }
+      .chat-messages::-webkit-scrollbar-thumb {
+        background-color: #a0aec0;
+        border-radius: 3px;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 text-gray-800" x-data="profileApp()">
+    <div
+      class="max-w-7xl mx-auto p-6 grid grid-cols-1 md:grid-cols-4 gap-6 min-h-screen"
+    >
+      <!-- Sidebar -->
+      <aside
+        class="md:col-span-1 bg-white rounded-lg shadow p-6 sticky top-6 h-[calc(100vh-3rem)] overflow-auto"
+      >
+        <div class="flex flex-col items-center space-y-4 mb-8">
+          <img
+            :src="user.profilePic"
+            alt="Profile Picture"
+            class="w-24 h-24 rounded-full border-4 border-blue-600 object-cover"
+          />
+          <h2 class="text-xl font-semibold" x-text="user.name"></h2>
+          <p class="text-gray-500 text-sm" x-text="user.email"></p>
+          <p class="text-gray-500 text-sm" x-text="user.location"></p>
+        </div>
+
+        <nav class="flex flex-col space-y-2 font-medium text-gray-700">
+          <button
+            class="w-full text-left px-4 py-2 rounded hover:bg-blue-100 transition"
+            :class="{'bg-blue-100 font-semibold text-blue-700': activeTab === 'profile'}"
+            @click="activeTab = 'profile'"
+          >
+            Profile Info
+          </button>
+          <button
+            class="w-full text-left px-4 py-2 rounded hover:bg-blue-100 transition"
+            :class="{'bg-blue-100 font-semibold text-blue-700': activeTab === 'favorites'}"
+            @click="activeTab = 'favorites'"
+          >
+            Favourites
+          </button>
+          <button
+            class="w-full text-left px-4 py-2 rounded hover:bg-blue-100 transition"
+            :class="{'bg-blue-100 font-semibold text-blue-700': activeTab === 'bookingHistory'}"
+            @click="activeTab = 'bookingHistory'"
+          >
+            Booking History
+          </button>
+          <button
+            class="w-full text-left px-4 py-2 rounded hover:bg-blue-100 transition"
+            :class="{'bg-blue-100 font-semibold text-blue-700': activeTab === 'notifications'}"
+            @click="activeTab = 'notifications'"
+          >
+            Notifications
+          </button>
+          <button
+            class="w-full text-left px-4 py-2 rounded hover:bg-blue-100 transition"
+            :class="{'bg-blue-100 font-semibold text-blue-700': activeTab === 'savedSearches'}"
+            @click="activeTab = 'savedSearches'"
+          >
+            Saved Searches
+          </button>
+          <button
+            class="w-full text-left px-4 py-2 rounded hover:bg-blue-100 transition"
+            :class="{'bg-blue-100 font-semibold text-blue-700': activeTab === 'messages'}"
+            @click="activeTab = 'messages'"
+          >
+            Messages
+          </button>
+          <button
+            class="w-full text-left px-4 py-2 rounded hover:bg-blue-100 transition"
+            :class="{'bg-blue-100 font-semibold text-blue-700': activeTab === 'accountSettings'}"
+            @click="activeTab = 'accountSettings'"
+          >
+            Account Settings
+          </button>
+          <button
+            class="w-full text-left px-4 py-2 rounded hover:bg-blue-100 transition"
+            :class="{'bg-blue-100 font-semibold text-blue-700': activeTab === 'paymentInfo'}"
+            @click="activeTab = 'paymentInfo'"
+          >
+            Payment Information
+          </button>
+          <button
+            class="w-full text-left px-4 py-2 rounded hover:bg-blue-100 transition"
+            :class="{'bg-blue-100 font-semibold text-blue-700': activeTab === 'securitySettings'}"
+            @click="activeTab = 'securitySettings'"
+          >
+            Security Settings
+          </button>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main
+        class="md:col-span-3 bg-white rounded-lg shadow p-6 overflow-auto max-h-[calc(100vh-3rem)]"
+      >
+        <!-- Profile Info Tab -->
+        <section x-show="activeTab === 'profile'" x-transition>
+          <h1 class="text-2xl font-bold mb-6">Profile Information</h1>
+
+          <div class="flex flex-col sm:flex-row gap-6">
+            <img
+              :src="user.profilePic"
+              alt="Profile Picture"
+              class="w-32 h-32 rounded-full border-4 border-blue-600 object-cover"
+            />
+            <div class="flex-1">
+              <p><strong>Name:</strong> <span x-text="user.name"></span></p>
+              <p><strong>Email:</strong> <span x-text="user.email"></span></p>
+              <p>
+                <strong>Location:</strong> <span x-text="user.location"></span>
+              </p>
+              <p><strong>Phone:</strong> <span x-text="user.phone"></span></p>
+            </div>
+          </div>
+
+          <button
+            class="mt-6 bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700"
+            @click="editProfileOpen = true"
+          >
+            Edit Profile
+          </button>
+
+          <!-- Edit Profile Modal -->
+          <div
+            x-show="editProfileOpen"
+            x-transition
+            class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50"
+          >
+            <div
+              @click.away="editProfileOpen = false"
+              class="bg-white rounded-lg shadow-lg max-w-lg w-full p-6 relative"
+            >
+              <h2 class="text-xl font-semibold mb-4">Edit Profile</h2>
+              <form @submit.prevent="saveProfile" class="space-y-4">
+                <div>
+                  <label class="block font-medium mb-1">Name</label>
+                  <input
+                    type="text"
+                    x-model="editProfile.name"
+                    class="w-full border rounded px-3 py-2"
+                    required
+                  />
+                </div>
+                <div>
+                  <label class="block font-medium mb-1">Email</label>
+                  <input
+                    type="email"
+                    x-model="editProfile.email"
+                    class="w-full border rounded px-3 py-2"
+                    required
+                  />
+                </div>
+                <div>
+                  <label class="block font-medium mb-1">Location</label>
+                  <input
+                    type="text"
+                    x-model="editProfile.location"
+                    class="w-full border rounded px-3 py-2"
+                    placeholder="City, Area"
+                  />
+                </div>
+                <div>
+                  <label class="block font-medium mb-1">Phone</label>
+                  <input
+                    type="tel"
+                    x-model="editProfile.phone"
+                    class="w-full border rounded px-3 py-2"
+                    placeholder="+880 1XXXXXXXXX"
+                  />
+                </div>
+                <div>
+                  <label class="block font-medium mb-1"
+                    >Profile Picture URL</label
+                  >
+                  <input
+                    type="url"
+                    x-model="editProfile.profilePic"
+                    class="w-full border rounded px-3 py-2"
+                    placeholder="https://..."
+                  />
+                </div>
+                <div class="flex justify-end space-x-3 mt-4">
+                  <button
+                    type="button"
+                    @click="editProfileOpen = false"
+                    class="px-4 py-2 rounded border hover:bg-gray-100"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    class="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
+                  >
+                    Save
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <!-- Favourites Tab -->
+        <section x-show="activeTab === 'favorites'" x-transition>
+          <h1 class="text-2xl font-bold mb-6">❤️ Favourites</h1>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <template x-for="fav in favourites" :key="fav.id">
+              <div
+                class="bg-gray-100 rounded-lg overflow-hidden shadow hover:shadow-md transition cursor-pointer"
+              >
+                <img
+                  :src="fav.image"
+                  alt="Property Image"
+                  class="w-full h-40 object-cover"
+                />
+                <div class="p-4">
+                  <h3 class="font-semibold text-lg" x-text="fav.title"></h3>
+                  <p class="text-sm text-gray-600" x-text="fav.details"></p>
+                  <button
+                    @click.prevent="removeFavourite(fav.id)"
+                    class="mt-2 text-red-600 hover:underline"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+            </template>
+            <template x-if="favourites.length === 0">
+              <p class="text-gray-500 italic">No favourites saved yet.</p>
+            </template>
+          </div>
+        </section>
+
+        <!-- Booking History Tab -->
+        <section x-show="activeTab === 'bookingHistory'" x-transition>
+          <h1 class="text-2xl font-bold mb-6">📜 Booking History</h1>
+          <div class="space-y-6 max-w-4xl">
+            <template x-for="(booking, i) in bookings" :key="booking.id">
+              <div
+                class="bg-gray-100 rounded-lg shadow p-6 flex flex-col sm:flex-row justify-between items-start gap-6"
+              >
+                <div class="flex-1">
+                  <h3 class="font-semibold text-lg" x-text="booking.title"></h3>
+                  <p
+                    class="text-sm text-gray-500"
+                    x-text="'Booked on: ' + booking.date"
+                  ></p>
+                  <label class="block mt-4 text-sm font-medium"
+                    >Your Review:</label
+                  >
+                  <textarea
+                    class="w-full border rounded px-3 py-2 text-sm"
+                    rows="2"
+                    placeholder="Write your review here..."
+                    x-model="booking.review"
+                  ></textarea>
+                </div>
+                <div class="text-right flex flex-col items-end gap-3">
+                  <div
+                    class="text-yellow-400 text-lg select-none"
+                    x-html="getStars(booking.rating)"
+                  ></div>
+                  <button
+                    class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                    @click.prevent="submitReview(i)"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </template>
+            <template x-if="bookings.length === 0">
+              <p class="text-gray-500 italic">No booking history found.</p>
+            </template>
+          </div>
+        </section>
+
+        <!-- Notifications Tab -->
+        <section x-show="activeTab === 'notifications'" x-transition>
+          <h1 class="text-2xl font-bold mb-6">🔔 Notifications</h1>
+          <ul class="max-w-4xl space-y-3">
+            <template x-for="(notif, i) in notifications" :key="i">
+              <li
+                class="bg-gray-100 rounded p-4 border-l-4 border-blue-600 text-gray-700"
+                x-text="notif"
+              ></li>
+            </template>
+            <template x-if="notifications.length === 0">
+              <p class="text-gray-500 italic">No notifications.</p>
+            </template>
+          </ul>
+        </section>
+
+        <!-- Saved Searches Tab -->
+        <section x-show="activeTab === 'savedSearches'" x-transition>
+          <h1 class="text-2xl font-bold mb-6">🔍 Saved Searches</h1>
+          <ul class="max-w-4xl space-y-3">
+            <template x-for="(search, i) in savedSearches" :key="i">
+              <li
+                class="flex justify-between items-center bg-gray-100 rounded p-4"
+              >
+                <span x-text="search"></span>
+                <button
+                  @click.prevent="removeSavedSearch(i)"
+                  class="text-red-600 hover:underline font-semibold"
+                >
+                  Remove
+                </button>
+              </li>
+            </template>
+            <template x-if="savedSearches.length === 0">
+              <p class="text-gray-500 italic">No saved searches.</p>
+            </template>
+          </ul>
+        </section>
+
+        <!-- Messages Tab -->
+        <section
+          x-show="activeTab === 'messages'"
+          x-transition
+          class="flex flex-col max-w-4xl h-[600px]"
+        >
+          <h1 class="text-2xl font-bold mb-6">💬 Messages</h1>
+          <div
+            class="flex flex-col flex-grow border rounded-lg overflow-hidden"
+          >
+            <div
+              class="flex-1 p-4 overflow-y-auto chat-messages bg-gray-50"
+              id="chatMessages"
+            >
+              <template x-for="(msg, i) in messages" :key="i">
+                <div
+                  :class="msg.from === 'owner' ? 'mb-4 text-left' : 'mb-4 text-right'"
+                >
+                  <div
+                    :class="msg.from === 'owner' ? 'inline-block bg-blue-100 text-blue-800 px-4 py-2 rounded-lg max-w-xs' : 'inline-block bg-green-100 text-green-800 px-4 py-2 rounded-lg max-w-xs'"
+                  >
+                    <p x-text="msg.text"></p>
+                    <span
+                      class="block text-xs text-gray-500 mt-1"
+                      x-text="msg.time"
+                    ></span>
+                  </div>
+                </div>
+              </template>
+              <template x-if="messages.length === 0">
+                <p class="text-gray-500 italic">
+                  No messages yet. Start a chat with property owners.
+                </p>
+              </template>
+            </div>
+            <form
+              @submit.prevent="sendMessage"
+              class="p-3 border-t flex items-center gap-3"
+            >
+              <input
+                type="text"
+                x-model="newMessage"
+                placeholder="Type your message..."
+                class="flex-grow border rounded px-3 py-2 focus:outline-blue-500"
+                required
+              />
+              <button
+                type="submit"
+                class="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700"
+              >
+                Send
+              </button>
+            </form>
+          </div>
+        </section>
+
+        <!-- Account Settings Tab -->
+        <section x-show="activeTab === 'accountSettings'" x-transition>
+          <h1 class="text-2xl font-bold mb-6">⚙️ Account Settings</h1>
+          <form
+            @submit.prevent="saveAccountSettings"
+            class="max-w-3xl space-y-6"
+          >
+            <div>
+              <label class="block font-medium mb-1">Change Email</label>
+              <input
+                type="email"
+                x-model="accountSettings.email"
+                class="w-full border rounded px-3 py-2"
+                placeholder="newemail@example.com"
+                required
+              />
+            </div>
+            <div>
+              <label class="block font-medium mb-1">Change Password</label>
+              <input
+                type="password"
+                x-model="accountSettings.password"
+                class="w-full border rounded px-3 py-2"
+                placeholder="New Password"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              class="bg-green-600 text-white px-5 py-2 rounded hover:bg-green-700"
+            >
+              Save Settings
+            </button>
+          </form>
+        </section>
+
+        <!-- Payment Information Tab -->
+        <section x-show="activeTab === 'paymentInfo'" x-transition>
+          <h1 class="text-2xl font-bold mb-6">💳 Payment Information</h1>
+          <div class="max-w-3xl space-y-4">
+            <template x-if="paymentMethods.length === 0">
+              <p class="text-gray-500 italic">No payment methods saved yet.</p>
+            </template>
+            <template x-for="(method, i) in paymentMethods" :key="method.id">
+              <div
+                class="bg-gray-100 rounded p-4 flex justify-between items-center"
+              >
+                <div>
+                  <p
+                    class="font-semibold"
+                    x-text="method.cardType + ' ending in ' + method.last4"
+                  ></p>
+                  <p
+                    class="text-sm text-gray-600"
+                    x-text="'Expires ' + method.expiry"
+                  ></p>
+                </div>
+                <button
+                  @click.prevent="removePaymentMethod(i)"
+                  class="text-red-600 hover:underline"
+                >
+                  Remove
+                </button>
+              </div>
+            </template>
+            <button
+              class="mt-4 bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700"
+              @click="addPaymentOpen = true"
+            >
+              Add Payment Method
+            </button>
+          </div>
+
+          <!-- Add Payment Modal -->
+          <div
+            x-show="addPaymentOpen"
+            x-transition
+            class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50"
+          >
+            <div
+              @click.away="addPaymentOpen = false"
+              class="bg-white rounded-lg shadow-lg max-w-md w-full p-6 relative"
+            >
+              <h2 class="text-xl font-semibold mb-4">Add Payment Method</h2>
+              <form @submit.prevent="savePaymentMethod" class="space-y-4">
+                <div>
+                  <label class="block font-medium mb-1">Card Type</label>
+                  <select
+                    x-model="newPayment.cardType"
+                    class="w-full border rounded px-3 py-2"
+                    required
+                  >
+                    <option value="" disabled>Select card type</option>
+                    <option>Visa</option>
+                    <option>MasterCard</option>
+                    <option>American Express</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block font-medium mb-1">Card Number</label>
+                  <input
+                    type="text"
+                    x-model="newPayment.cardNumber"
+                    maxlength="16"
+                    placeholder="1234 5678 9012 3456"
+                    class="w-full border rounded px-3 py-2"
+                    required
+                  />
+                </div>
+                <div>
+                  <label class="block font-medium mb-1">Expiry Date</label>
+                  <input
+                    type="month"
+                    x-model="newPayment.expiry"
+                    class="w-full border rounded px-3 py-2"
+                    required
+                  />
+                </div>
+                <div>
+                  <label class="block font-medium mb-1">CVV</label>
+                  <input
+                    type="password"
+                    x-model="newPayment.cvv"
+                    maxlength="4"
+                    class="w-full border rounded px-3 py-2"
+                    required
+                  />
+                </div>
+                <div class="flex justify-end space-x-3 mt-4">
+                  <button
+                    type="button"
+                    @click="addPaymentOpen = false"
+                    class="px-4 py-2 rounded border hover:bg-gray-100"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    class="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
+                  >
+                    Save
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <!-- Security Settings Tab -->
+        <section x-show="activeTab === 'securitySettings'" x-transition>
+          <h1 class="text-2xl font-bold mb-6">🔐 Security Settings</h1>
+          <form
+            @submit.prevent="saveSecuritySettings"
+            class="max-w-3xl space-y-6"
+          >
+            <div>
+              <label class="block font-medium mb-1"
+                >Two-Factor Authentication</label
+              >
+              <select
+                x-model="security.twoFA"
+                class="w-full border rounded px-3 py-2"
+              >
+                <option value="off">Off</option>
+                <option value="sms">SMS</option>
+                <option value="app">Authenticator App</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-medium mb-1">Change Password</label>
+              <input
+                type="password"
+                x-model="security.password"
+                class="w-full border rounded px-3 py-2"
+                placeholder="New Password"
+              />
+            </div>
+            <button
+              type="submit"
+              class="bg-green-600 text-white px-5 py-2 rounded hover:bg-green-700"
+            >
+              Save Security Settings
+            </button>
+          </form>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      function profileApp() {
+        return {
+          activeTab: "profile",
+          editProfileOpen: false,
+          addPaymentOpen: false,
+          newMessage: "",
+          user: {
+            name: "Wa Lid",
+            email: "wa.lid@example.com",
+            location: "Dhaka, Bangladesh",
+            phone: "+880 1XXXXXXXXX",
+            profilePic: "https://i.pravatar.cc/150?img=12",
+          },
+          editProfile: {},
+          favourites: [
+            {
+              id: 1,
+              title: "3 Bedroom Apartment in Gulshan",
+              details: "৳45,000/month • 3 Beds • 2 Baths",
+              image: "https://source.unsplash.com/400x250/?apartment",
+            },
+            {
+              id: 2,
+              title: "Cozy Flat in Dhanmondi",
+              details: "৳30,000/month • 2 Beds • 1 Bath",
+              image: "https://source.unsplash.com/400x250/?flat",
+            },
+          ],
+          bookings: [
+            {
+              id: 101,
+              title: "3 Bedroom Apartment in Gulshan",
+              date: "2024-07-25",
+              review: "",
+              rating: 0,
+            },
+            {
+              id: 102,
+              title: "Cozy Flat in Dhanmondi",
+              date: "2024-06-10",
+              review: "",
+              rating: 0,
+            },
+          ],
+          notifications: [
+            "Your request for '3 Bedroom Apartment in Gulshan' was approved.",
+            "New message from owner of Cozy Flat in Dhanmondi.",
+          ],
+          savedSearches: [
+            "Apartments in Gulshan under ৳50,000",
+            "Flats in Dhanmondi with 2+ bedrooms",
+          ],
+          messages: [
+            {
+              from: "owner",
+              text: "Hello! Interested in the Gulshan apartment?",
+              time: "09:15 AM",
+            },
+            {
+              from: "user",
+              text: "Yes, can I schedule a visit?",
+              time: "09:17 AM",
+            },
+          ],
+          accountSettings: {
+            email: "wa.lid@example.com",
+            password: "",
+          },
+          paymentMethods: [
+            {
+              id: 1,
+              cardType: "Visa",
+              last4: "1234",
+              expiry: "2025-12",
+            },
+          ],
+          newPayment: {
+            cardType: "",
+            cardNumber: "",
+            expiry: "",
+            cvv: "",
+          },
+          security: {
+            twoFA: "off",
+            password: "",
+          },
+
+          saveProfile() {
+            // save editProfile data to user
+            Object.assign(this.user, this.editProfile);
+            this.editProfileOpen = false;
+            alert("Profile updated successfully!");
+          },
+          removeFavourite(id) {
+            this.favourites = this.favourites.filter((fav) => fav.id !== id);
+          },
+          submitReview(index) {
+            const booking = this.bookings[index];
+            if (booking.review.trim() === "") {
+              alert("Please write a review before submitting.");
+              return;
+            }
+            if (booking.rating < 1 || booking.rating > 5) {
+              alert("Please provide a rating between 1 and 5 stars.");
+              return;
+            }
+            alert(`Review for ${booking.title} submitted!`);
+          },
+          getStars(rating) {
+            if (!rating || rating < 1) return "☆☆☆☆☆";
+            let stars = "";
+            for (let i = 1; i <= 5; i++) {
+              stars += i <= rating ? "★" : "☆";
+            }
+            return stars;
+          },
+          removeSavedSearch(index) {
+            this.savedSearches.splice(index, 1);
+          },
+          sendMessage() {
+            if (this.newMessage.trim() === "") return;
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            });
+            this.messages.push({
+              from: "user",
+              text: this.newMessage.trim(),
+              time: timeStr,
+            });
+            this.newMessage = "";
+            this.scrollChatToBottom();
+          },
+          scrollChatToBottom() {
+            this.$nextTick(() => {
+              const chatDiv = document.getElementById("chatMessages");
+              if (chatDiv) chatDiv.scrollTop = chatDiv.scrollHeight;
+            });
+          },
+          saveAccountSettings() {
+            alert("Account settings saved!");
+          },
+          removePaymentMethod(index) {
+            this.paymentMethods.splice(index, 1);
+          },
+          savePaymentMethod() {
+            if (
+              !this.newPayment.cardType ||
+              !this.newPayment.cardNumber ||
+              !this.newPayment.expiry ||
+              !this.newPayment.cvv
+            ) {
+              alert("Please fill all payment fields.");
+              return;
+            }
+            // simple validation for card number length
+            if (this.newPayment.cardNumber.length < 12) {
+              alert("Invalid card number.");
+              return;
+            }
+            // add payment method
+            this.paymentMethods.push({
+              id: Date.now(),
+              cardType: this.newPayment.cardType,
+              last4: this.newPayment.cardNumber.slice(-4),
+              expiry: this.newPayment.expiry,
+            });
+            this.addPaymentOpen = false;
+            // reset newPayment
+            this.newPayment = {
+              cardType: "",
+              cardNumber: "",
+              expiry: "",
+              cvv: "",
+            };
+            alert("Payment method added!");
+          },
+          saveSecuritySettings() {
+            alert("Security settings saved!");
+          },
+          init() {
+            this.editProfile = { ...this.user };
+            this.scrollChatToBottom();
+          },
+        };
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Corner - Barivara.com</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        overflow-x: hidden;
+      }
+      .scroll-container {
+        display: flex;
+        gap: 1rem;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        padding-bottom: 1rem;
+        scrollbar-width: none;
+      }
+      .scroll-container::-webkit-scrollbar {
+        display: none;
+      }
+      .scroll-button {
+        background-color: #3b82f6;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 9999px;
+        position: absolute;
+        top: 40%;
+        transform: translateY(-50%);
+        z-index: 20;
+        cursor: pointer;
+        opacity: 0.9;
+        transition: opacity 0.2s ease-in-out, background-color 0.2s ease-in-out;
+      }
+      .scroll-button:hover {
+        opacity: 1;
+        background-color: #2563eb;
+      }
+      .faq-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 1rem;
+        text-align: left;
+        font-weight: 600;
+        background-color: #f3f4f6;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+      .faq-header:hover {
+        background-color: #e5e7eb;
+      }
+      .faq-content {
+        padding: 1rem;
+        background-color: #ffffff;
+        border-top: 1px solid #e5e7eb;
+        border-bottom-left-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 text-gray-800">
+    <!-- Header -->
+    <header
+      x-data="{ mobileMenu: false }"
+      class="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center relative z-50"
+    >
+      <div class="flex items-center gap-2">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/619/619034.png"
+          class="w-8 h-8"
+          alt="Logo"
+        />
+        <span class="text-orange-600 font-bold text-xl">Barivara.com</span>
+      </div>
+      <nav class="hidden md:flex space-x-6 text-gray-700 font-medium">
+        <a href="#" class="hover:text-orange-500 transition">Home</a>
+        <a href="propartylist.html" class="hover:text-orange-500 transition"
+          >Property</a
+        >
+        <a href="service.html" class="hover:text-orange-500 transition"
+          >Service</a
+        >
+        <a href="#" class="hover:text-orange-500 transition">Real Estate</a>
+        <a href="#" class="text-orange-600 font-semibold transition"
+          >Student Corner</a
+        >
+      </nav>
+      <a href="profile.html" class="hidden md:inline-block">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/847/847969.png"
+          alt="Profile"
+          class="w-8 h-8 rounded-full"
+        />
+      </a>
+      <div class="md:hidden">
+        <button
+          @click="mobileMenu = !mobileMenu"
+          class="text-gray-600 focus:outline-none"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-7 w-7"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+      </div>
+      <div
+        x-show="mobileMenu"
+        class="absolute top-20 left-0 w-full bg-white border-t shadow-md md:hidden z-50"
+        x-transition
+      >
+        <ul class="flex flex-col px-4 py-4 space-y-2 text-gray-700 font-medium">
+          <li><a href="#" class="block">Home</a></li>
+          <li><a href="propartylist.html" class="block">Property</a></li>
+          <li><a href="service.html" class="block">Service</a></li>
+          <li><a href="#" class="block">Real Estate</a></li>
+          <li>
+            <a
+              href="profile.html"
+              class="block w-full text-left bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+              >Profile</a
+            >
+          </li>
+        </ul>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <!-- Hero Section -->
+    <!-- HERO SECTION  (Replace the old one with this block) -->
+    <section class="max-w-7xl mx-auto px-4 py-12">
+      <div
+        class="bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-10 relative overflow-hidden"
+      >
+        <!-- TEXT + SEARCH -->
+        <div class="md:w-1/2 z-10 text-center md:text-left">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4 leading-tight">
+            Get access to 10,000 students hostels across
+            <span class="text-yellow-300">Bangladesh</span>
+          </h2>
+          <p class="text-lg mb-8 opacity-90">
+            We provide clean and hygienic student hostels in affordable prices
+            with safe and secure environments.
+          </p>
+
+          <!-- SEARCH BAR -->
+          <div
+            class="bg-white rounded-full shadow-lg px-3 py-2 flex flex-wrap md:flex-nowrap items-center gap-2 md:gap-4"
+          >
+            <!-- CITY -->
+            <div class="flex items-center gap-2 flex-1 min-w-[140px]">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 text-gray-500 flex-shrink-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17.657 16.657 13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+              </svg>
+              <select
+                class="w-full outline-none bg-transparent text-sm text-gray-700"
+              >
+                <option selected>City</option>
+                <option>Dhaka</option>
+                <option>Chittagong</option>
+                <option>Sylhet</option>
+              </select>
+            </div>
+
+            <!-- DATES -->
+            <div class="flex items-center gap-2 flex-1 min-w-[140px]">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 text-gray-500 flex-shrink-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 7V3m8 4V3m-9 8h9m-3 4h.01M3 8h18a2 2 0 012 2v10a2 2 0 01-2 2H3a2 2 0 01-2-2V10a2 2 0 012-2z"
+                />
+              </svg>
+              <input
+                type="text"
+                placeholder="01 Aug – 30 Nov"
+                class="w-full outline-none bg-transparent text-sm text-gray-700 placeholder:text-gray-500"
+              />
+            </div>
+
+            <!-- TYPE -->
+            <div class="flex items-center gap-2 flex-1 min-w-[140px]">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 text-gray-500 flex-shrink-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m7 0V7a2 2 0 012-2h1a2 2 0 012 2v4"
+                />
+              </svg>
+              <select
+                class="w-full outline-none bg-transparent text-sm text-gray-700"
+              >
+                <option selected>Type</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Single</option>
+                <option>Shared</option>
+              </select>
+            </div>
+
+            <!-- BUTTON -->
+            <button
+              class="flex items-center justify-center whitespace-nowrap bg-blue-600 text-white font-semibold rounded-full px-6 py-2 hover:bg-blue-700 transition flex-shrink-0"
+            >
+              Find
+            </button>
+          </div>
+        </div>
+
+        <!-- IMAGE -->
+        <div class="md:w-1/2 flex justify-center md:justify-end">
+          <img
+            src="https://img.freepik.com/premium-photo/excited-young-student-girl-posing-holding-tablet-computer-backpack-standing-yellow-background-ready-back-school_74952-4752.jpg?w=1060"
+            alt="Student"
+            class="w-64 md:w-80 lg:w-96 h-auto rounded-xl shadow-xl"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <div class="max-w-7xl mx-auto px-4 space-y-16 py-8">
+      <!-- Affordable Listings -->
+      <section class="relative">
+        <h2 class="text-2xl font-semibold mb-6">Affordable Listings</h2>
+        <button
+          onclick="scrollContainer('affordable-scroll', -1)"
+          class="scroll-button left-2"
+        >
+          ❮
+        </button>
+        <div id="affordable-scroll" class="scroll-container pl-12 pr-12 pb-4">
+          <!-- Cards x6 -->
+          <div
+            class="bg-white rounded-xl shadow-md w-72 shrink-0 overflow-hidden"
+          >
+            <img
+              src="https://source.unsplash.com/400x250/?single-room"
+              alt="Single Room"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-4 space-y-2">
+              <h4 class="text-lg font-semibold text-gray-800">
+                Single Room in Mirpur
+              </h4>
+              <p class="text-sm text-gray-500">📍 Mirpur, Dhaka</p>
+              <p class="text-blue-600 font-bold text-xl mt-2">৳ 4,500 /Month</p>
+              <a
+                href="#"
+                class="inline-block mt-3 text-blue-600 font-semibold text-sm hover:underline"
+                >View Details →</a
+              >
+            </div>
+          </div>
+          <div
+            class="bg-white rounded-xl shadow-md w-72 shrink-0 overflow-hidden"
+          >
+            <img
+              src="https://source.unsplash.com/400x250/?shared-room"
+              alt="Shared Room"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-4 space-y-2">
+              <h4 class="text-lg font-semibold text-gray-800">
+                Shared Room in Mohammadpur
+              </h4>
+              <p class="text-sm text-gray-500">📍 Mohammadpur, Dhaka</p>
+              <p class="text-blue-600 font-bold text-xl mt-2">৳ 3,500 /Month</p>
+              <a
+                href="#"
+                class="inline-block mt-3 text-blue-600 font-semibold text-sm hover:underline"
+                >View Details →</a
+              >
+            </div>
+          </div>
+          <div
+            class="bg-white rounded-xl shadow-md w-72 shrink-0 overflow-hidden"
+          >
+            <img
+              src="https://source.unsplash.com/400x250/?studio-apartment"
+              alt="Studio Apartment"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-4 space-y-2">
+              <h4 class="text-lg font-semibold text-gray-800">
+                Studio Apartment in Uttara
+              </h4>
+              <p class="text-sm text-gray-500">📍 Uttara, Dhaka</p>
+              <p class="text-blue-600 font-bold text-xl mt-2">৳ 6,000 /Month</p>
+              <a
+                href="#"
+                class="inline-block mt-3 text-blue-600 font-semibold text-sm hover:underline"
+                >View Details →</a
+              >
+            </div>
+          </div>
+          <div
+            class="bg-white rounded-xl shadow-md w-72 shrink-0 overflow-hidden"
+          >
+            <img
+              src="https://source.unsplash.com/400x250/?hostel-room"
+              alt="Hostel Room"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-4 space-y-2">
+              <h4 class="text-lg font-semibold text-gray-800">
+                Hostel Room in Dhanmondi
+              </h4>
+              <p class="text-sm text-gray-500">📍 Dhanmondi, Dhaka</p>
+              <p class="text-blue-600 font-bold text-xl mt-2">৳ 5,000 /Month</p>
+              <a
+                href="#"
+                class="inline-block mt-3 text-blue-600 font-semibold text-sm hover:underline"
+                >View Details →</a
+              >
+            </div>
+          </div>
+          <div
+            class="bg-white rounded-xl shadow-md w-72 shrink-0 overflow-hidden"
+          >
+            <img
+              src="https://source.unsplash.com/400x250/?budget-room"
+              alt="Budget Room"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-4 space-y-2">
+              <h4 class="text-lg font-semibold text-gray-800">
+                Budget Room in Khilgaon
+              </h4>
+              <p class="text-sm text-gray-500">📍 Khilgaon, Dhaka</p>
+              <p class="text-blue-600 font-bold text-xl mt-2">৳ 4,000 /Month</p>
+              <a
+                href="#"
+                class="inline-block mt-3 text-blue-600 font-semibold text-sm hover:underline"
+                >View Details →</a
+              >
+            </div>
+          </div>
+          <div
+            class="bg-white rounded-xl shadow-md w-72 shrink-0 overflow-hidden"
+          >
+            <img
+              src="https://source.unsplash.com/400x250/?apartment-building"
+              alt="Apartment Building"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-4 space-y-2">
+              <h4 class="text-lg font-semibold text-gray-800">
+                1 Bedroom Flat in Gulshan
+              </h4>
+              <p class="text-sm text-gray-500">📍 Gulshan, Dhaka</p>
+              <p class="text-blue-600 font-bold text-xl mt-2">৳ 7,500 /Month</p>
+              <a
+                href="#"
+                class="inline-block mt-3 text-blue-600 font-semibold text-sm hover:underline"
+                >View Details →</a
+              >
+            </div>
+          </div>
+        </div>
+        <button
+          onclick="scrollContainer('affordable-scroll', 1)"
+          class="scroll-button right-2"
+        >
+          ❯
+        </button>
+      </section>
+
+      <!-- Near Universities -->
+      <section class="relative">
+        <h2 class="text-2xl font-semibold mb-6">Near Universities</h2>
+        <button
+          onclick="scrollContainer('university-scroll', -1)"
+          class="scroll-button left-2"
+        >
+          ❮
+        </button>
+        <div id="university-scroll" class="scroll-container pl-12 pr-12 pb-4">
+          <!-- Cards x6 -->
+          <div
+            class="bg-white rounded-xl shadow-md w-72 shrink-0 overflow-hidden"
+          >
+            <img
+              src="https://source.unsplash.com/400x250/?university,hostel"
+              alt="Hostel"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-4 space-y-2">
+              <h4 class="text-lg font-semibold">Hostel near BUET</h4>
+              <p class="text-sm text-gray-500">📍 10 min walk from BUET</p>
+              <p class="text-blue-600 font-bold text-xl mt-2">৳ 7,000 /Month</p>
+              <a
+                href="#"
+                class="inline-block mt-3 text-blue-600 font-semibold text-sm hover:underline"
+                >View Details →</a
+              >
+            </div>
+          </div>
+          <div
+            class="bg-white rounded-xl shadow-md w-72 shrink-0 overflow-hidden"
+          >
+            <img
+              src="https://source.unsplash.com/400x250/?university,dorm"
+              alt="Dorm"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-4 space-y-2">
+              <h4 class="text-lg font-semibold">Dormitory near DU</h4>
+              <p class="text-sm text-gray-500">📍 5 min walk from DU</p>
+              <p class="text-blue-600 font-bold text-xl mt-2">৳ 6,500 /Month</p>
+              <a
+                href="#"
+                class="inline-block mt-3 text-blue-600 font-semibold text-sm hover:underline"
+                >View Details →</a
+              >
+            </div>
+          </div>
+          <div
+            class="bg-white rounded-xl shadow-md w-72 shrink-0 overflow-hidden"
+          >
+            <img
+              src="https://source.unsplash.com/400x250/?student-apartment"
+              alt="Apartment"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-4 space-y-2">
+              <h4 class="text-lg font-semibold">Apartment near NSU</h4>
+              <p class="text-sm text-gray-500">📍 15 min walk from NSU</p>
+              <p class="text-blue-600 font-bold text-xl mt-2">৳ 9,000 /Month</p>
+              <a
+                href="#"
+                class="inline-block mt-3 text-blue-600 font-semibold text-sm hover:underline"
+                >View Details →</a
+              >
+            </div>
+          </div>
+          <div
+            class="bg-white rounded-xl shadow-md w-72 shrink-0 overflow-hidden"
+          >
+            <img
+              src="https://source.unsplash.com/400x250/?campus,dorm"
+              alt="Campus Dorm"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-4 space-y-2">
+              <h4 class="text-lg font-semibold">Mess near AIUB</h4>
+              <p class="text-sm text-gray-500">📍 5 min walk from AIUB</p>
+              <p class="text-blue-600 font-bold text-xl mt-2">৳ 5,000 /Month</p>
+              <a
+                href="#"
+                class="inline-block mt-3 text-blue-600 font-semibold text-sm hover:underline"
+                >View Details →</a
+              >
+            </div>
+          </div>
+          <div
+            class="bg-white rounded-xl shadow-md w-72 shrink-0 overflow-hidden"
+          >
+            <img
+              src="https://source.unsplash.com/400x250/?college,hostel"
+              alt="College Hostel"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-4 space-y-2">
+              <h4 class="text-lg font-semibold">Hostel near IUB</h4>
+              <p class="text-sm text-gray-500">📍 10 min walk from IUB</p>
+              <p class="text-blue-600 font-bold text-xl mt-2">৳ 7,500 /Month</p>
+              <a
+                href="#"
+                class="inline-block mt-3 text-blue-600 font-semibold text-sm hover:underline"
+                >View Details →</a
+              >
+            </div>
+          </div>
+          <div
+            class="bg-white rounded-xl shadow-md w-72 shrink-0 overflow-hidden"
+          >
+            <img
+              src="https://source.unsplash.com/400x250/?student-living"
+              alt="Student Living"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-4 space-y-2">
+              <h4 class="text-lg font-semibold">Sublet near BRACU</h4>
+              <p class="text-sm text-gray-500">📍 15 min walk from BRACU</p>
+              <p class="text-blue-600 font-bold text-xl mt-2">৳ 8,500 /Month</p>
+              <a
+                href="#"
+                class="inline-block mt-3 text-blue-600 font-semibold text-sm hover:underline"
+                >View Details →</a
+              >
+            </div>
+          </div>
+        </div>
+        <button
+          onclick="scrollContainer('university-scroll', 1)"
+          class="scroll-button right-2"
+        >
+          ❯
+        </button>
+      </section>
+
+      <!-- Roommate Finder -->
+      <section class="relative">
+        <h2 class="text-2xl font-semibold mb-6">Roommate Finder</h2>
+        <button
+          onclick="scrollContainer('roommate-scroll', -1)"
+          class="scroll-button left-2"
+        >
+          ❮
+        </button>
+        <div id="roommate-scroll" class="scroll-container pl-12 pr-12 pb-4">
+          <!-- Cards x6 -->
+          <div
+            class="bg-white rounded-xl shadow-md w-72 shrink-0 p-6 flex flex-col justify-between"
+          >
+            <div class="flex-grow">
+              <h3 class="text-lg font-semibold mb-2">
+                Ahmed, 22 - Looking for roommate
+              </h3>
+              <p class="text-sm text-gray-600">Currently in Mirpur</p>
+              <p class="text-sm text-gray-600">
+                Likes quiet environments and study-friendly homes.
+              </p>
+            </div>
+            <button
+              class="mt-4 bg-blue-600 text-white py-2 rounded w-full hover:bg-blue-700 transition font-semibold"
+            >
+              Contact
+            </button>
+          </div>
+          <div
+            class="bg-white rounded-xl shadow-md w-72 shrink-0 p-6 flex flex-col justify-between"
+          >
+            <div class="flex-grow">
+              <h3 class="text-lg font-semibold mb-2">
+                Sara, 21 - Needs female roommate
+              </h3>
+              <p class="text-sm text-gray-600">Currently in Dhanmondi</p>
+              <p class="text-sm text-gray-600">
+                Student at DU, prefers non-smoker.
+              </p>
+            </div>
+            <button
+              class="mt-4 bg-blue-600 text-white py-2 rounded w-full hover:bg-blue-700 transition font-semibold"
+            >
+              Contact
+            </button>
+          </div>
+          <div
+            class="bg-white rounded-xl shadow-md w-72 shrink-0 p-6 flex flex-col justify-between"
+          >
+            <div class="flex-grow">
+              <h3 class="text-lg font-semibold mb-2">
+                Rahim, 23 - Searching roommate
+              </h3>
+              <p class="text-sm text-gray-600">Currently in Uttara</p>
+              <p class="text-sm text-gray-600">
+                Likes music and socializing, looking for friendly roommates.
+              </p>
+            </div>
+            <button
+              class="mt-4 bg-blue-600 text-white py-2 rounded w-full hover:bg-blue-700 transition font-semibold"
+            >
+              Contact
+            </button>
+          </div>
+          <div
+            class="bg-white rounded-xl shadow-md w-72 shrink-0 p-6 flex flex-col justify-between"
+          >
+            <div class="flex-grow">
+              <h3 class="text-lg font-semibold mb-2">
+                Nadia, 20 - Roommate needed
+              </h3>
+              <p class="text-sm text-gray-600">Currently in Banani</p>
+              <p class="text-sm text-gray-600">
+                Student at AIUB, loves pets, non-smoker.
+              </p>
+            </div>
+            <button
+              class="mt-4 bg-blue-600 text-white py-2 rounded w-full hover:bg-blue-700 transition font-semibold"
+            >
+              Contact
+            </button>
+          </div>
+          <div
+            class="bg-white rounded-xl shadow-md w-72 shrink-0 p-6 flex flex-col justify-between"
+          >
+            <div class="flex-grow">
+              <h3 class="text-lg font-semibold mb-2">
+                Riaz, 24 - Looking for roommate
+              </h3>
+              <p class="text-sm text-gray-600">Currently in Gulshan</p>
+              <p class="text-sm text-gray-600">
+                Early riser, neat and tidy. Prefers clean person.
+              </p>
+            </div>
+            <button
+              class="mt-4 bg-blue-600 text-white py-2 rounded w-full hover:bg-blue-700 transition font-semibold"
+            >
+              Contact
+            </button>
+          </div>
+          <div
+            class="bg-white rounded-xl shadow-md w-72 shrink-0 p-6 flex flex-col justify-between"
+          >
+            <div class="flex-grow">
+              <h3 class="text-lg font-semibold mb-2">
+                Farah, 22 - Needs roommate
+              </h3>
+              <p class="text-sm text-gray-600">Currently in Dhanmondi</p>
+              <p class="text-sm text-gray-600">
+                Student at ULAB, enjoys quiet study environment.
+              </p>
+            </div>
+            <button
+              class="mt-4 bg-blue-600 text-white py-2 rounded w-full hover:bg-blue-700 transition font-semibold"
+            >
+              Contact
+            </button>
+          </div>
+        </div>
+        <button
+          onclick="scrollContainer('roommate-scroll', 1)"
+          class="scroll-button right-2"
+        >
+          ❯
+        </button>
+      </section>
+
+      <!-- Promotions -->
+      <section class="relative">
+        <h2 class="text-2xl font-semibold mb-6">
+          Promotions & Special Discounts
+        </h2>
+        <button
+          onclick="scrollContainer('discount-scroll', -1)"
+          class="scroll-button left-2"
+        >
+          ❮
+        </button>
+        <div id="discount-scroll" class="scroll-container pl-12 pr-12 pb-4">
+          <!-- Cards x6 -->
+          <div
+            class="bg-white rounded-xl shadow-md w-72 shrink-0 overflow-hidden"
+          >
+            <img
+              src="https://source.unsplash.com/400x250/?discount,room"
+              alt="Discount"
+              class="w-full h-40 object-cover"
+            />
+            <div class="p-4 space-y-2">
+              <h4 class="text-lg font-semibold">Winter Discount</h4>
+              <p class="text-sm text-gray-600">
+                10% off on rooms booked before Dec 31.
+              </p>
+            </div>
+          </div>
+          <div
+            class="bg-white rounded-xl shadow-md w-72 shrink-0 overflow-hidden"
+          >
+            <img
+              src="https://source.unsplash.com/400x250/?offer,apartment"
+              alt="Offer"
+              class="w-full h-40 object-cover"
+            />
+            <div class="p-4 space-y-2">
+              <h4 class="text-lg font-semibold">First Month Free</h4>
+              <p class="text-sm text-gray-600">
+                Special offer for new students in Banani area.
+              </p>
+            </div>
+          </div>
+          <div
+            class="bg-white rounded-xl shadow-md w-72 shrink-0 overflow-hidden"
+          >
+            <img
+              src="https://source.unsplash.com/400x250/?sale,hostel"
+              alt="Sale"
+              class="w-full h-40 object-cover"
+            />
+            <div class="p-4 space-y-2">
+              <h4 class="text-lg font-semibold">Group Booking Offer</h4>
+              <p class="text-sm text-gray-600">
+                Get 15% discount for group bookings of 3+.
+              </p>
+            </div>
+          </div>
+          <div
+            class="bg-white rounded-xl shadow-md w-72 shrink-0 overflow-hidden"
+          >
+            <img
+              src="https://source.unsplash.com/400x250/?discount,flat"
+              alt="Discount Flat"
+              class="w-full h-40 object-cover"
+            />
+            <div class="p-4 space-y-2">
+              <h4 class="text-lg font-semibold">Summer Deal</h4>
+              <p class="text-sm text-gray-600">
+                Save 20% on 6-month lease sign-up.
+              </p>
+            </div>
+          </div>
+          <div
+            class="bg-white rounded-xl shadow-md w-72 shrink-0 overflow-hidden"
+          >
+            <img
+              src="https://source.unsplash.com/400x250/?cashback,offer"
+              alt="Cashback"
+              class="w-full h-40 object-cover"
+            />
+            <div class="p-4 space-y-2">
+              <h4 class="text-lg font-semibold">Referral Bonus</h4>
+              <p class="text-sm text-gray-600">
+                Refer a friend and get ৳1000 cashback.
+              </p>
+            </div>
+          </div>
+          <div
+            class="bg-white rounded-xl shadow-md w-72 shrink-0 overflow-hidden"
+          >
+            <img
+              src="https://source.unsplash.com/400x250/?offer,student"
+              alt="Student Offer"
+              class="w-full h-40 object-cover"
+            />
+            <div class="p-4 space-y-2">
+              <h4 class="text-lg font-semibold">Student Special</h4>
+              <p class="text-sm text-gray-600">
+                5% discount for early booking before semester.
+              </p>
+            </div>
+          </div>
+        </div>
+        <button
+          onclick="scrollContainer('discount-scroll', 1)"
+          class="scroll-button right-2"
+        >
+          ❯
+        </button>
+      </section>
+
+      <!-- Tips for Students -->
+      <section class="relative">
+        <h2 class="text-2xl font-semibold mb-6">Tips for Students</h2>
+        <button
+          onclick="scrollContainer('tips-scroll', -1)"
+          class="scroll-button left-2"
+        >
+          ❮
+        </button>
+        <div id="tips-scroll" class="scroll-container pl-12 pr-12 pb-4">
+          <!-- Cards x6 -->
+          <div
+            class="bg-white rounded-xl shadow-md w-64 shrink-0 p-6 flex flex-col justify-center"
+          >
+            <h3 class="text-lg font-semibold mb-2">Budget Your Rent</h3>
+            <p class="text-gray-600 text-sm">
+              Plan your monthly rent carefully to avoid stress.
+            </p>
+          </div>
+          <div
+            class="bg-white rounded-xl shadow-md w-64 shrink-0 p-6 flex flex-col justify-center"
+          >
+            <h3 class="text-lg font-semibold mb-2">Check Neighborhood</h3>
+            <p class="text-gray-600 text-sm">
+              Visit and research the neighborhood before renting.
+            </p>
+          </div>
+          <div
+            class="bg-white rounded-xl shadow-md w-64 shrink-0 p-6 flex flex-col justify-center"
+          >
+            <h3 class="text-lg font-semibold mb-2">Communicate with Owner</h3>
+            <p class="text-gray-600 text-sm">
+              Maintain clear communication with your landlord.
+            </p>
+          </div>
+          <div
+            class="bg-white rounded-xl shadow-md w-64 shrink-0 p-6 flex flex-col justify-center"
+          >
+            <h3 class="text-lg font-semibold mb-2">Safety First</h3>
+            <p class="text-gray-600 text-sm">
+              Always check security measures in the property.
+            </p>
+          </div>
+          <div
+            class="bg-white rounded-xl shadow-md w-64 shrink-0 p-6 flex flex-col justify-center"
+          >
+            <h3 class="text-lg font-semibold mb-2">Read the Lease</h3>
+            <p class="text-gray-600 text-sm">
+              Understand the terms before signing any contract.
+            </p>
+          </div>
+          <div
+            class="bg-white rounded-xl shadow-md w-64 shrink-0 p-6 flex flex-col justify-center"
+          >
+            <h3 class="text-lg font-semibold mb-2">Keep Copies</h3>
+            <p class="text-gray-600 text-sm">
+              Keep copies of all important documents and receipts.
+            </p>
+          </div>
+        </div>
+        <button
+          onclick="scrollContainer('tips-scroll', 1)"
+          class="scroll-button right-2"
+        >
+          ❯
+        </button>
+      </section>
+
+      <!-- Guest Testimonials -->
+      <section class="relative">
+        <h2 class="text-2xl font-semibold mb-6">Guest Testimonials</h2>
+        <button
+          onclick="scrollContainer('reviews-scroll', -1)"
+          class="scroll-button left-2"
+        >
+          ❮
+        </button>
+        <div id="reviews-scroll" class="scroll-container pl-12 pr-12 pb-4">
+          <!-- Cards x6 -->
+          <div
+            class="bg-blue-50 rounded-xl shadow-md w-80 shrink-0 p-6 flex flex-col"
+          >
+            <p class="text-gray-700 text-lg italic mb-4 flex-grow">
+              "Exceptional hostel experience! Comfortable accommodations,
+              friendly staff, and a vibrant atmosphere."
+            </p>
+            <div class="flex items-center gap-3 mt-auto">
+              <img
+                src="https://source.unsplash.com/40x40/?portrait,female-student"
+                alt="Ayesha"
+                class="w-10 h-10 rounded-full object-cover"
+              />
+              <div>
+                <p class="font-semibold text-gray-800">Ayesha</p>
+                <p class="text-sm text-gray-500">Student, DU</p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-blue-50 rounded-xl shadow-md w-80 shrink-0 p-6 flex flex-col"
+          >
+            <p class="text-gray-700 text-lg italic mb-4 flex-grow">
+              "The staff went above and beyond, the dorm rooms were clean, and
+              the common areas fostered a lively community."
+            </p>
+            <div class="flex items-center gap-3 mt-auto">
+              <img
+                src="https://source.unsplash.com/40x40/?portrait,male-student"
+                alt="Rafiqul"
+                class="w-10 h-10 rounded-full object-cover"
+              />
+              <div>
+                <p class="font-semibold text-gray-800">Rafiqul</p>
+                <p class="text-sm text-gray-500">Student, BUET</p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-blue-50 rounded-xl shadow-md w-80 shrink-0 p-6 flex flex-col"
+          >
+            <p class="text-gray-700 text-lg italic mb-4 flex-grow">
+              "Budget-friendly excellence! Loved the diverse crowd and the easy
+              booking process. My go-to hostel!"
+            </p>
+            <div class="flex items-center gap-3 mt-auto">
+              <img
+                src="https://source.unsplash.com/40x40/?portrait,student-girl"
+                alt="Mina"
+                class="w-10 h-10 rounded-full object-cover"
+              />
+              <div>
+                <p class="font-semibold text-gray-800">Mina</p>
+                <p class="text-sm text-gray-500">Student, NSU</p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-blue-50 rounded-xl shadow-md w-80 shrink-0 p-6 flex flex-col"
+          >
+            <p class="text-gray-700 text-lg italic mb-4 flex-grow">
+              "Found a great place through Barivara. Safe, clean and exactly as
+              advertised. Highly recommended."
+            </p>
+            <div class="flex items-center gap-3 mt-auto">
+              <img
+                src="https://source.unsplash.com/40x40/?portrait,student-male"
+                alt="Tariq"
+                class="w-10 h-10 rounded-full object-cover"
+              />
+              <div>
+                <p class="font-semibold text-gray-800">Tariq</p>
+                <p class="text-sm text-gray-500">Student, AIUB</p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-blue-50 rounded-xl shadow-md w-80 shrink-0 p-6 flex flex-col"
+          >
+            <p class="text-gray-700 text-lg italic mb-4 flex-grow">
+              "The roommate finder feature is amazing! Found my current roommate
+              here and it's been great."
+            </p>
+            <div class="flex items-center gap-3 mt-auto">
+              <img
+                src="https://source.unsplash.com/40x40/?portrait,girl-student"
+                alt="Lina"
+                class="w-10 h-10 rounded-full object-cover"
+              />
+              <div>
+                <p class="font-semibold text-gray-800">Lina</p>
+                <p class="text-sm text-gray-500">Student, IUB</p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-blue-50 rounded-xl shadow-md w-80 shrink-0 p-6 flex flex-col"
+          >
+            <p class="text-gray-700 text-lg italic mb-4 flex-grow">
+              "Convenient location and friendly neighbors. Made my student life
+              much easier. Thank you Barivara!"
+            </p>
+            <div class="flex items-center gap-3 mt-auto">
+              <img
+                src="https://source.unsplash.com/40x40/?portrait,guy-student"
+                alt="Sabbir"
+                class="w-10 h-10 rounded-full object-cover"
+              />
+              <div>
+                <p class="font-semibold text-gray-800">Sabbir</p>
+                <p class="text-sm text-gray-500">Student, BRACU</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button
+          onclick="scrollContainer('reviews-scroll', 1)"
+          class="scroll-button right-2"
+        >
+          ❯
+        </button>
+      </section>
+
+      <!-- FAQs -->
+      <section>
+        <h2 class="text-2xl font-semibold mb-6">Frequently Asked Questions</h2>
+        <div class="space-y-4" x-data="{ open: 'faq1' }">
+          <!-- FAQ Item 1 -->
+          <div>
+            <button
+              class="faq-header"
+              @click="open = (open === 'faq1' ? '' : 'faq1')"
+            >
+              <span>Can I rent for short term stay?</span
+              ><span x-show="open !== 'faq1'" class="text-xl">✚</span
+              ><span x-show="open === 'faq1'" class="text-xl">−</span>
+            </button>
+            <div
+              x-show="open === 'faq1'"
+              x-transition
+              class="faq-content text-gray-700"
+            >
+              Yes, many hostels offer short-term stays. The minimum tenancy is
+              usually one (1) week, but it varies by property.
+            </div>
+          </div>
+          <!-- FAQ Item 2 -->
+          <div>
+            <button
+              class="faq-header"
+              @click="open = (open === 'faq2' ? '' : 'faq2')"
+            >
+              <span>How do I book a hostel?</span
+              ><span x-show="open !== 'faq2'" class="text-xl">✚</span
+              ><span x-show="open === 'faq2'" class="text-xl">−</span>
+            </button>
+            <div
+              x-show="open === 'faq2'"
+              x-transition
+              class="faq-content text-gray-700"
+            >
+              You can book a hostel directly through our platform by selecting
+              your desired property, choosing dates, and following the payment
+              instructions.
+            </div>
+          </div>
+          <!-- FAQ Item 3 -->
+          <div>
+            <button
+              class="faq-header"
+              @click="open = (open === 'faq3' ? '' : 'faq3')"
+            >
+              <span>Are private rooms available?</span
+              ><span x-show="open !== 'faq3'" class="text-xl">✚</span
+              ><span x-show="open === 'faq3'" class="text-xl">−</span>
+            </button>
+            <div
+              x-show="open === 'faq3'"
+              x-transition
+              class="faq-content text-gray-700"
+            >
+              Yes, many hostels offer private rooms in addition to dormitory
+              options. You can use the search filters to find private rooms
+              specifically.
+            </div>
+          </div>
+          <!-- FAQ Item 4 -->
+          <div>
+            <button
+              class="faq-header"
+              @click="open = (open === 'faq4' ? '' : 'faq4')"
+            >
+              <span>Is there a security deposit?</span
+              ><span x-show="open !== 'faq4'" class="text-xl">✚</span
+              ><span x-show="open === 'faq4'" class="text-xl">−</span>
+            </button>
+            <div
+              x-show="open === 'faq4'"
+              x-transition
+              class="faq-content text-gray-700"
+            >
+              Most landlords require a security deposit, typically equal to one
+              month's rent. This is refundable at the end of your stay, provided
+              there are no damages.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Others Section (Grid Layout) -->
+      <section>
+        <h2 class="text-2xl font-semibold mb-6">Other Available Listings</h2>
+        <div
+          id="others"
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+        >
+          <!-- Cards x8 (this will grow vertically) -->
+          <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <img
+              src="https://source.unsplash.com/400x250/?mess,food"
+              alt="Mess"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-4 space-y-2">
+              <h4 class="text-lg font-semibold text-gray-800">
+                Student Mess in Farmgate
+              </h4>
+              <p class="text-sm text-gray-500">📍 Farmgate, Dhaka</p>
+              <p class="text-blue-600 font-bold text-xl mt-2">৳ 3,000 /Month</p>
+              <a
+                href="#"
+                class="inline-block mt-3 text-blue-600 font-semibold text-sm hover:underline"
+                >View Details →</a
+              >
+            </div>
+          </div>
+          <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <img
+              src="https://source.unsplash.com/400x250/?sublet,room"
+              alt="Sublet"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-4 space-y-2">
+              <h4 class="text-lg font-semibold text-gray-800">
+                Sublet Room in Bashundhara R/A
+              </h4>
+              <p class="text-sm text-gray-500">📍 Bashundhara, Dhaka</p>
+              <p class="text-blue-600 font-bold text-xl mt-2">৳ 6,500 /Month</p>
+              <a
+                href="#"
+                class="inline-block mt-3 text-blue-600 font-semibold text-sm hover:underline"
+                >View Details →</a
+              >
+            </div>
+          </div>
+          <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <img
+              src="https://source.unsplash.com/400x250/?female,hostel"
+              alt="Female Hostel"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-4 space-y-2">
+              <h4 class="text-lg font-semibold text-gray-800">
+                Girls Hostel in Mohakhali
+              </h4>
+              <p class="text-sm text-gray-500">📍 Mohakhali, Dhaka</p>
+              <p class="text-blue-600 font-bold text-xl mt-2">৳ 5,500 /Month</p>
+              <a
+                href="#"
+                class="inline-block mt-3 text-blue-600 font-semibold text-sm hover:underline"
+                >View Details →</a
+              >
+            </div>
+          </div>
+          <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <img
+              src="https://source.unsplash.com/400x250/?male,hostel"
+              alt="Male Hostel"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-4 space-y-2">
+              <h4 class="text-lg font-semibold text-gray-800">
+                Boys Hostel in Lalmatia
+              </h4>
+              <p class="text-sm text-gray-500">📍 Lalmatia, Dhaka</p>
+              <p class="text-blue-600 font-bold text-xl mt-2">৳ 4,800 /Month</p>
+              <a
+                href="#"
+                class="inline-block mt-3 text-blue-600 font-semibold text-sm hover:underline"
+                >View Details →</a
+              >
+            </div>
+          </div>
+          <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <img
+              src="https://source.unsplash.com/400x250/?bachelor,room"
+              alt="Bachelor Room"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-4 space-y-2">
+              <h4 class="text-lg font-semibold text-gray-800">
+                Bachelor Seat in Badda
+              </h4>
+              <p class="text-sm text-gray-500">📍 Badda, Dhaka</p>
+              <p class="text-blue-600 font-bold text-xl mt-2">৳ 3,800 /Month</p>
+              <a
+                href="#"
+                class="inline-block mt-3 text-blue-600 font-semibold text-sm hover:underline"
+                >View Details →</a
+              >
+            </div>
+          </div>
+          <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <img
+              src="https://source.unsplash.com/400x250/?student,flat"
+              alt="Student Flat"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-4 space-y-2">
+              <h4 class="text-lg font-semibold text-gray-800">
+                2-Bed Flat in Mirpur DOHS
+              </h4>
+              <p class="text-sm text-gray-500">📍 Mirpur DOHS, Dhaka</p>
+              <p class="text-blue-600 font-bold text-xl mt-2">
+                ৳ 12,000 /Month
+              </p>
+              <a
+                href="#"
+                class="inline-block mt-3 text-blue-600 font-semibold text-sm hover:underline"
+                >View Details →</a
+              >
+            </div>
+          </div>
+          <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <img
+              src="https://source.unsplash.com/400x250/?dorm,bed"
+              alt="Dorm Bed"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-4 space-y-2">
+              <h4 class="text-lg font-semibold text-gray-800">
+                Dorm Bed in Paltan
+              </h4>
+              <p class="text-sm text-gray-500">📍 Paltan, Dhaka</p>
+              <p class="text-blue-600 font-bold text-xl mt-2">৳ 2,500 /Month</p>
+              <a
+                href="#"
+                class="inline-block mt-3 text-blue-600 font-semibold text-sm hover:underline"
+                >View Details →</a
+              >
+            </div>
+          </div>
+          <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <img
+              src="https://source.unsplash.com/400x250/?rooftop,room"
+              alt="Rooftop Room"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-4 space-y-2">
+              <h4 class="text-lg font-semibold text-gray-800">
+                Rooftop Room in Dhanmondi
+              </h4>
+              <p class="text-sm text-gray-500">📍 Dhanmondi, Dhaka</p>
+              <p class="text-blue-600 font-bold text-xl mt-2">৳ 8,000 /Month</p>
+              <a
+                href="#"
+                class="inline-block mt-3 text-blue-600 font-semibold text-sm hover:underline"
+                >View Details →</a
+              >
+            </div>
+          </div>
+        </div>
+        <!-- For a "thousand cards", you'd add a "Load More" button here -->
+        <div class="text-center mt-8">
+          <button
+            class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-semibold"
+          >
+            Load More
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      function scrollContainer(id, direction) {
+        const container = document.getElementById(id);
+        const scrollAmount = 300; // Adjust scroll distance as needed
+        container.scrollBy({
+          left: direction * scrollAmount,
+          behavior: "smooth",
+        });
+      }
+    </script>
+  </body>
+</html>

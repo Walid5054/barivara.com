@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Real Estate - Barivara</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 text-gray-800">
+    <!-- Hero Section -->
+    <section
+      class="bg-[url('https://source.unsplash.com/1600x600/?real-estate,bangladesh')] bg-cover bg-center text-white py-32 px-4"
+    >
+      <div class="max-w-7xl mx-auto text-center">
+        <h1 class="text-4xl md:text-6xl font-bold">
+          Find Your Perfect Home in Bangladesh
+        </h1>
+        <p class="text-xl mt-4">
+          Buy, Rent, or Lease verified properties from trusted owners
+        </p>
+        <a
+          href="#listings"
+          class="inline-block mt-6 bg-blue-600 px-6 py-3 rounded text-white font-semibold hover:bg-blue-700"
+          >Browse Listings</a
+        >
+      </div>
+    </section>
+
+    <!-- Search Filter -->
+    <section class="bg-white shadow py-6">
+      <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-5 gap-4">
+        <input
+          type="text"
+          placeholder="Location (e.g. Dhanmondi)"
+          class="border px-4 py-2 rounded w-full"
+        />
+        <select class="border px-4 py-2 rounded w-full">
+          <option>Property Type</option>
+          <option>Apartment</option>
+          <option>House</option>
+          <option>Commercial</option>
+          <option>Land</option>
+        </select>
+        <select class="border px-4 py-2 rounded w-full">
+          <option>Purpose</option>
+          <option>Buy</option>
+          <option>Rent</option>
+          <option>Lease</option>
+        </select>
+        <select class="border px-4 py-2 rounded w-full">
+          <option>Price Range</option>
+          <option>৳10k–30k</option>
+          <option>৳30k–60k</option>
+          <option>৳60k–1L</option>
+          <option>Above ৳1L</option>
+        </select>
+        <button
+          class="bg-blue-600 text-white rounded px-4 py-2 hover:bg-blue-700"
+        >
+          Search
+        </button>
+      </div>
+    </section>
+
+    <!-- Featured Listings -->
+    <section id="listings" class="py-12 max-w-7xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-10">Featured Properties</h2>
+      <div
+        class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
+        <!-- Example card -->
+        <div class="bg-white rounded-lg shadow overflow-hidden">
+          <img
+            src="https://source.unsplash.com/400x300/?apartment,bangladesh"
+            alt="property"
+            class="w-full h-48 object-cover"
+          />
+          <div class="p-4">
+            <h3 class="font-semibold text-lg">Modern Flat in Bashundhara</h3>
+            <p class="text-gray-500 text-sm">📍 Bashundhara, Dhaka</p>
+            <div class="flex justify-between text-xs mt-2 text-gray-600">
+              <span>🛏 3 Beds</span>
+              <span>🛁 2 Baths</span>
+              <span>📐 1450 sqft</span>
+            </div>
+            <p class="text-blue-600 font-bold text-xl mt-2">৳ 70,00,000</p>
+            <a
+              href="#"
+              class="mt-3 inline-block text-sm text-blue-700 hover:underline"
+              >View Details</a
+            >
+          </div>
+        </div>
+        <!-- Repeat different listings -->
+      </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="bg-blue-50 py-16">
+      <div class="max-w-6xl mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold mb-6">Why Choose Barivara?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div>
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/2659/2659360.png"
+              class="w-16 mx-auto mb-3"
+            />
+            <h4 class="text-xl font-semibold mb-2">Verified Listings</h4>
+            <p class="text-gray-600 text-sm">
+              We ensure all properties are checked & verified before publishing.
+            </p>
+          </div>
+          <div>
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+              class="w-16 mx-auto mb-3"
+            />
+            <h4 class="text-xl font-semibold mb-2">Owner Direct Deals</h4>
+            <p class="text-gray-600 text-sm">
+              No middlemen. Get in touch directly with owners or property
+              managers.
+            </p>
+          </div>
+          <div>
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/3595/3595455.png"
+              class="w-16 mx-auto mb-3"
+            />
+            <h4 class="text-xl font-semibold mb-2">Transparent Pricing</h4>
+            <p class="text-gray-600 text-sm">
+              Our pricing tools help you get the best property for your budget.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="bg-blue-600 text-white py-12">
+      <div class="max-w-7xl mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold">
+          Want to Sell or Rent Out Your Property?
+        </h2>
+        <p class="mt-2">
+          List your property now and reach thousands of potential buyers and
+          tenants.
+        </p>
+        <a
+          href="/register"
+          class="mt-4 inline-block bg-white text-blue-600 px-6 py-3 rounded font-semibold hover:bg-gray-100"
+          >Post Your Property</a
+        >
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+      <div
+        class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between"
+      >
+        <div>
+          <h4 class="font-bold text-lg">Barivara.com</h4>
+          <p class="text-sm text-gray-400 mt-2">
+            Your trusted property partner in Bangladesh
+          </p>
+        </div>
+        <div class="space-x-4 mt-4 md:mt-0">
+          <a href="/" class="text-gray-300 hover:underline">Home</a>
+          <a href="/property" class="text-gray-300 hover:underline">Property</a>
+          <a href="/service" class="text-gray-300 hover:underline">Service</a>
+          <a href="/contact" class="text-gray-300 hover:underline">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
