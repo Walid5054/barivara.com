@@ -12,6 +12,89 @@
     </style>
   </head>
   <body class="bg-gray-50 text-gray-800">
+    <header
+      x-data="{ mobileMenu: false }"
+      class="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center relative z-50"
+    >
+      <!-- Logo -->
+      <div class="flex items-center gap-2">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/619/619034.png"
+          class="w-8 h-8"
+          alt="Logo"
+        />
+        <span class="text-orange-600 font-bold text-xl">Barivara.com</span>
+      </div>
+
+      <!-- Desktop Menu -->
+      <nav class="hidden md:flex space-x-6 text-gray-700 font-medium">
+        <a href="home.html" class="hover:text-orange-500 transition">Home</a>
+        <a href="propartylist.html" class="hover:text-orange-500 transition"
+          >Property</a
+        >
+        <a href="student.html" class="hover:text-orange-500 transition"
+          >Student Corner</a
+        >
+        <a href="#" class="hover:text-orange-500 transition">Real Estate</a>
+        <a href="service.html" class="hover:text-orange-500 transition"
+          >Service</a
+        >
+      </nav>
+
+      <!-- Desktop Profile Button -->
+      <a href="profile.html" class="hidden md:inline-block">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/847/847969.png"
+          alt="Profile"
+          class="w-8 h-8 rounded-full"
+        />
+      </a>
+
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden">
+        <button
+          @click="mobileMenu = !mobileMenu"
+          class="text-gray-600 focus:outline-none"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-7 w-7"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Dropdown Menu -->
+      <div
+        x-show="mobileMenu"
+        class="absolute top-20 left-0 w-full bg-white border-t shadow-md md:hidden z-50"
+        x-transition
+      >
+        <ul class="flex flex-col px-4 py-4 space-y-2 text-gray-700 font-medium">
+          <li><a href="#" class="block">Home</a></li>
+          <li><a href="propartylist.html" class="block">Property</a></li>
+          <li><a href="service.html" class="block">Service</a></li>
+          <li><a href="#" class="block">Real Estate</a></li>
+          <li>
+            <a
+              href="profile.html"
+              class="block w-full text-left bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+            >
+              Profile
+            </a>
+          </li>
+        </ul>
+      </div>
+    </header>
     <!-- Hero Section -->
     <section
       class="bg-[url('https://source.unsplash.com/1600x600/?real-estate,bangladesh')] bg-cover bg-center text-white py-32 px-4"
