@@ -1,7 +1,6 @@
 function scrollContainer(id, direction) {
   const container = document.getElementById(id);
-  const cardWidth = 280; // fixed card width + margin approx
-
+  const cardWidth = 280;
   const maxScroll = container.scrollWidth - container.clientWidth;
   const currentScroll = container.scrollLeft;
 
@@ -19,7 +18,7 @@ function scrollContainer(id, direction) {
 
 function renderSection(id) {
   const container = document.getElementById(id);
-  container.innerHTML = ""; // Clear previous cards
+  container.innerHTML = "";
 
   const propertiesData = {
     "top-properties": [

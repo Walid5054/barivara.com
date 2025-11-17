@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Owner Dashboard - Barivara</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* small style to hide scrollbar on horizontal scroll lists if needed */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 font-inter antialiased text-gray-800">
+    <!-- Top navbar -->
+    <header class="bg-white shadow sticky top-0 z-40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center gap-4">
+            <a href="#" class="text-2xl font-bold text-blue-600">Barivara</a>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <button
+              id="btnAddProperty"
+              class="bg-blue-600 text-white px-4 py-2 rounded shadow hover:brightness-95"
+            >
+              Add Property
+            </button>
+            <div class="relative">
+              <button class="p-2 rounded-full bg-white border shadow">
+                <svg
+                  class="w-5 h-5 text-gray-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-5-5.917V4a2 2 0 10-4 0v1.083A6.002 6.002 0 004 11v3.159c0 .538-.214 1.055-.595 1.436L2 17h5m8 0v1a3 3 0 11-6 0v-1m6 0H9"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <div class="flex items-center gap-3">
+              <img
+                src="https://i.pravatar.cc/36"
+                alt="owner"
+                class="w-9 h-9 rounded-full border"
+              />
+              <div class="text-sm leading-tight">
+                <div class="font-semibold">Owner Name</div>
+                <div class="text-gray-500">Dhaka, Bangladesh</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="grid grid-cols-12 gap-6">
+        <!-- Sidebar -->
+        <aside class="col-span-12 lg:col-span-3">
+          <div class="bg-white p-4 rounded-lg shadow sticky top-20">
+            <div class="mb-4">
+              <div class="text-xs text-gray-500">Account</div>
+              <div class="text-lg font-semibold mt-1">Owner Dashboard</div>
+            </div>
+
+            <nav class="flex flex-col gap-2 text-sm">
+              <button
+                onclick="showSection('overview')"
+                class="text-left px-3 py-2 rounded hover:bg-blue-50"
+                id="nav-overview"
+              >
+                Overview
+              </button>
+              <button
+                onclick="showSection('properties')"
+                class="text-left px-3 py-2 rounded hover:bg-blue-50"
+                id="nav-properties"
+              >
+                My Properties
+              </button>
+              <button
+                onclick="showSection('requests')"
+                class="text-left px-3 py-2 rounded hover:bg-blue-50"
+                id="nav-requests"
+              >
+                Booking Requests
+              </button>
+              <button
+                onclick="showSection('schedule')"
+                class="text-left px-3 py-2 rounded hover:bg-blue-50"
+                id="nav-schedule"
+              >
+                Visit Schedule
+              </button>
+              <button
+                onclick="showSection('analytics')"
+                class="text-left px-3 py-2 rounded hover:bg-blue-50"
+                id="nav-analytics"
+              >
+                Analytics
+              </button>
+              <button
+                onclick="showSection('settings')"
+                class="text-left px-3 py-2 rounded hover:bg-blue-50"
+                id="nav-settings"
+              >
+                Settings
+              </button>
+            </nav>
+          </div>
+        </aside>
+
+        <!-- Main content -->
+        <section class="col-span-12 lg:col-span-9 space-y-6">
+          <!-- Overview -->
+          <div id="section-overview" class="bg-white p-6 rounded-lg shadow">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-xl font-semibold">Overview</h2>
+              <div class="text-sm text-gray-500">
+                Summary of your listings & activity
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+              <div
+                class="p-4 bg-gradient-to-br from-white to-blue-50 rounded-lg shadow-sm border"
+              >
+                <div class="text-xs text-gray-500">Total Listings</div>
+                <div id="stat-total" class="text-2xl font-bold mt-2">0</div>
+              </div>
+              <div class="p-4 bg-white rounded-lg shadow-sm border">
+                <div class="text-xs text-gray-500">Active Listings</div>
+                <div id="stat-active" class="text-2xl font-bold mt-2">0</div>
+              </div>
+              <div class="p-4 bg-white rounded-lg shadow-sm border">
+                <div class="text-xs text-gray-500">Pending Requests</div>
+                <div id="stat-requests" class="text-2xl font-bold mt-2">0</div>
+              </div>
+              <div class="p-4 bg-white rounded-lg shadow-sm border">
+                <div class="text-xs text-gray-500">Upcoming Visits</div>
+                <div id="stat-visits" class="text-2xl font-bold mt-2">0</div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <!-- Recent Activity -->
+              <div>
+                <h3 class="font-semibold mb-3">Recent Activity</h3>
+                <ul
+                  id="recent-activity"
+                  class="space-y-3 text-sm text-gray-700"
+                ></ul>
+              </div>
+
+              <!-- Quick Actions -->
+              <div>
+                <h3 class="font-semibold mb-3">Quick Actions</h3>
+                <div class="flex gap-3 flex-wrap">
+                  <button
+                    id="quickAdd"
+                    class="px-4 py-2 bg-blue-600 text-white rounded hover:brightness-95"
+                  >
+                    Add Property
+                  </button>
+                  <button
+                    onclick="showSection('properties')"
+                    class="px-4 py-2 bg-white border rounded"
+                  >
+                    Manage Properties
+                  </button>
+                  <button
+                    onclick="showSection('requests')"
+                    class="px-4 py-2 bg-white border rounded"
+                  >
+                    View Requests
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- My Properties -->
+          <div
+            id="section-properties"
+            class="bg-white p-6 rounded-lg shadow hidden"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-xl font-semibold">My Properties</h2>
+              <div class="text-sm text-gray-500">Manage your listings</div>
+            </div>
+
+            <div
+              id="properties-grid"
+              class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+            >
+              <!-- Property cards render here -->
+            </div>
+          </div>
+
+          <!-- Booking Requests -->
+          <div
+            id="section-requests"
+            class="bg-white p-6 rounded-lg shadow hidden"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-xl font-semibold">Booking Requests</h2>
+              <div class="text-sm text-gray-500">Pending tenant requests</div>
+            </div>
+
+            <div id="requests-list" class="space-y-4">
+              <!-- Request items render here -->
+            </div>
+          </div>
+
+          <!-- Visit Schedule -->
+          <div
+            id="section-schedule"
+            class="bg-white p-6 rounded-lg shadow hidden"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-xl font-semibold">Visit Schedule</h2>
+              <div class="text-sm text-gray-500">
+                Calendar & scheduled visits
+              </div>
+            </div>
+
+            <div id="visits-list" class="space-y-4">
+              <!-- visits render here -->
+            </div>
+          </div>
+
+          <!-- Analytics -->
+          <div
+            id="section-analytics"
+            class="bg-white p-6 rounded-lg shadow hidden"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-xl font-semibold">Analytics</h2>
+              <div class="text-sm text-gray-500">Views & performance</div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="p-4 bg-white rounded shadow-sm">
+                <h3 class="font-semibold text-sm mb-2">
+                  Top Properties by Views
+                </h3>
+                <ul id="top-properties" class="text-sm text-gray-700"></ul>
+              </div>
+              <div class="p-4 bg-white rounded shadow-sm">
+                <h3 class="font-semibold text-sm mb-2">
+                  Monthly Overview (placeholder)
+                </h3>
+                <p class="text-gray-500">
+                  Charts can be inserted here (Recharts / Chart.js)
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Settings -->
+          <div
+            id="section-settings"
+            class="bg-white p-6 rounded-lg shadow hidden"
+          >
+            <h2 class="text-xl font-semibold mb-4">Settings</h2>
+            <div class="space-y-4">
+              <div>
+                <label class="text-sm font-medium">Business name</label>
+                <input
+                  id="ownerBusiness"
+                  class="mt-1 block w-full border rounded px-3 py-2"
+                  placeholder="Owner / Agency name"
+                />
+              </div>
+              <div>
+                <label class="text-sm font-medium">Contact number</label>
+                <input
+                  id="ownerPhone"
+                  class="mt-1 block w-full border rounded px-3 py-2"
+                  placeholder="+8801XXXXXXXXX"
+                />
+              </div>
+              <div class="flex gap-3">
+                <button
+                  onclick="saveSettings()"
+                  class="px-4 py-2 bg-blue-600 text-white rounded"
+                >
+                  Save
+                </button>
+                <button
+                  onclick="resetSettings()"
+                  class="px-4 py-2 bg-white border rounded"
+                >
+                  Reset
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Add Property Modal -->
+    <div
+      id="modalAdd"
+      class="fixed inset-0 bg-black/40 hidden items-center justify-center z-50"
+    >
+      <div class="bg-white rounded-lg shadow-lg max-w-2xl w-full p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-lg font-semibold">Add New Property</h3>
+          <button
+            onclick="closeAddModal()"
+            class="text-gray-500 hover:text-gray-700"
+          >
+            ✕
+          </button>
+        </div>
+
+        <form
+          id="formAdd"
+          class="space-y-3"
+          onsubmit="event.preventDefault(); submitAddProperty();"
+        >
+          <div>
+            <label class="text-sm font-medium">Title</label>
+            <input
+              id="p_title"
+              class="mt-1 block w-full border rounded px-3 py-2"
+              required
+            />
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div>
+              <label class="text-sm font-medium">Category</label>
+              <select
+                id="p_category"
+                class="mt-1 block w-full border rounded px-3 py-2"
+              >
+                <option>Family</option>
+                <option>Student</option>
+                <option>Bachelor</option>
+                <option>Shop/Office</option>
+              </select>
+            </div>
+            <div>
+              <label class="text-sm font-medium">Price (BDT)</label>
+              <input
+                id="p_price"
+                type="number"
+                class="mt-1 block w-full border rounded px-3 py-2"
+                required
+              />
+            </div>
+            <div>
+              <label class="text-sm font-medium">Location</label>
+              <input
+                id="p_location"
+                class="mt-1 block w-full border rounded px-3 py-2"
+                required
+              />
+            </div>
+          </div>
+
+          <div>
+            <label class="text-sm font-medium">Image URL (one)</label>
+            <input
+              id="p_image"
+              class="mt-1 block w-full border rounded px-3 py-2"
+              placeholder="https://..."
+            />
+          </div>
+
+          <div>
+            <label class="text-sm font-medium">Description</label>
+            <textarea
+              id="p_description"
+              class="mt-1 block w-full border rounded px-3 py-2"
+              rows="3"
+            ></textarea>
+          </div>
+
+          <div class="flex gap-3 justify-end">
+            <button
+              type="button"
+              onclick="closeAddModal()"
+              class="px-4 py-2 bg-white border rounded"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="px-4 py-2 bg-blue-600 text-white rounded"
+            >
+              Add Property
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Confirm Modal -->
+    <div
+      id="modalConfirm"
+      class="fixed inset-0 bg-black/40 hidden items-center justify-center z-50"
+    >
+      <div class="bg-white rounded-lg shadow-lg max-w-md w-full p-6">
+        <h3 id="confirmTitle" class="text-lg font-semibold mb-3">Confirm</h3>
+        <p id="confirmMessage" class="text-sm text-gray-600 mb-4">
+          Are you sure?
+        </p>
+        <div class="flex gap-3 justify-end">
+          <button onclick="hideConfirm()" class="px-4 py-2 border rounded">
+            Cancel
+          </button>
+          <button
+            id="confirmAccept"
+            onclick="confirmAccept()"
+            class="px-4 py-2 bg-red-600 text-white rounded"
+          >
+            Yes
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Template for cloning card (hidden) -->
+    <template id="tplPropertyCard">
+      <div class="bg-white shadow rounded-lg overflow-hidden border">
+        <img class="w-full h-44 object-cover" />
+        <div class="p-4">
+          <div class="flex justify-between items-start">
+            <div>
+              <h4 class="font-semibold text-lg"></h4>
+              <p class="text-sm text-gray-500"></p>
+            </div>
+            <span
+              class="inline-block text-xs px-2 py-1 rounded-full bg-green-100 text-green-700"
+              >Available</span
+            >
+          </div>
+          <p class="text-sm mt-2 text-gray-600"></p>
+          <div class="mt-3 flex justify-between items-center">
+            <div class="text-sm font-semibold text-blue-600"></div>
+            <div class="flex gap-2">
+              <button class="btn-edit px-3 py-1 border rounded text-sm">
+                Edit
+              </button>
+              <button class="btn-delete px-3 py-1 border rounded text-sm">
+                Delete
+              </button>
+              <button class="btn-toggle px-3 py-1 border rounded text-sm">
+                Toggle
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <!-- Scripts -->
+    <script>
+      /* ------------------------------
+       In-memory demo data
+    ------------------------------*/
+      let properties = [
+        {
+          id: "P1",
+          title: "2 Bed Apartment in Dhanmondi",
+          category: "Family",
+          price: 25000,
+          location: "Dhanmondi 10",
+          img: "https://source.unsplash.com/600x400/?apartment",
+          status: "available",
+          views: 120,
+        },
+        {
+          id: "P2",
+          title: "Single Room near DU",
+          category: "Student",
+          price: 4500,
+          location: "Dhanmondi 3",
+          img: "https://source.unsplash.com/600x400/?hostel",
+          status: "available",
+          views: 86,
+        },
+        {
+          id: "P3",
+          title: "Bachelor Flat in Mirpur",
+          category: "Bachelor",
+          price: 7000,
+          location: "Mirpur 2",
+          img: "https://source.unsplash.com/600x400/?room",
+          status: "booked",
+          views: 60,
+        },
+      ];
+
+      let requests = [
+        {
+          requestId: "R1",
+          propertyId: "P2",
+          tenantName: "Rafi (Student)",
+          visitDate: "2025-05-18",
+          visitTime: "10:00 AM",
+          message: "I want to visit on Sunday.",
+          status: "pending",
+        },
+        {
+          requestId: "R2",
+          propertyId: "P1",
+          tenantName: "Sadia (Family)",
+          visitDate: "2025-05-19",
+          visitTime: "3:30 PM",
+          message: "Is the parking included?",
+          status: "pending",
+        },
+      ];
+
+      let visits = [
+        // after approval will be pushed here
+        {
+          visitId: "V1",
+          propertyId: "P3",
+          tenantName: "Jamal",
+          scheduledAt: "2025-05-20 11:00",
+          status: "scheduled",
+        },
+      ];
+
+      /* ------------------------------
+       Helpers & rendering functions
+    ------------------------------*/
+      function $(id) {
+        return document.getElementById(id);
+      }
+
+      function showSection(key) {
+        const sections = [
+          "overview",
+          "properties",
+          "requests",
+          "schedule",
+          "analytics",
+          "settings",
+        ];
+        sections.forEach((s) => {
+          const el = $("section-" + s);
+          if (!el) return;
+          if (s === key) el.classList.remove("hidden");
+          else el.classList.add("hidden");
+        });
+        // highlight sidebar (simple)
+        sections.forEach((s) => {
+          const nav = $("nav-" + s);
+        });
+        // update quick stats
+        renderStats();
+      }
+
+      function renderStats() {
+        $("stat-total").innerText = properties.length;
+        $("stat-active").innerText = properties.filter(
+          (p) => p.status === "available"
+        ).length;
+        $("stat-requests").innerText = requests.filter(
+          (r) => r.status === "pending"
+        ).length;
+        $("stat-visits").innerText = visits.filter(
+          (v) => v.status === "scheduled"
+        ).length;
+      }
+
+      function renderRecentActivity() {
+        const list = $("recent-activity");
+        list.innerHTML = "";
+        const activity = [];
+        requests
+          .slice()
+          .reverse()
+          .forEach((r) =>
+            activity.push(
+              `${r.tenantName} requested a visit for ${getPropertyTitle(
+                r.propertyId
+              )}.`
+            )
+          );
+        visits
+          .slice()
+          .reverse()
+          .forEach((v) =>
+            activity.push(
+              `${v.tenantName} scheduled a visit for ${getPropertyTitle(
+                v.propertyId
+              )}.`
+            )
+          );
+        activity.slice(0, 6).forEach((a) => {
+          const li = document.createElement("li");
+          li.className = "text-sm text-gray-700";
+          li.innerText = a;
+          list.appendChild(li);
+        });
+      }
+
+      function getPropertyTitle(pid) {
+        const p = properties.find((x) => x.id === pid);
+        return p ? p.title : "Property";
+      }
+
+      /* Render properties grid */
+      function renderProperties() {
+        const grid = $("properties-grid");
+        grid.innerHTML = "";
+        const tpl = document.getElementById("tplPropertyCard").content;
+        properties.forEach((prop) => {
+          const node = tpl.cloneNode(true);
+          node.querySelector("img").src = prop.img;
+          node.querySelector("h4").innerText = prop.title;
+          node.querySelectorAll("p")[0].innerText = prop.location;
+          node.querySelectorAll("p")[1].innerText = prop.description || "";
+          node.querySelector(".text-blue-600").innerText =
+            "BDT " + prop.price + "/mo";
+          const badge = node.querySelector("span");
+          badge.innerText =
+            prop.status === "available"
+              ? "Available"
+              : prop.status === "booked"
+              ? "Booked"
+              : "Rented";
+          // Buttons
+          const btnEdit = node.querySelector(".btn-edit");
+          const btnDel = node.querySelector(".btn-delete");
+          const btnToggle = node.querySelector(".btn-toggle");
+          btnEdit.onclick = () => openEditProperty(prop.id);
+          btnDel.onclick = () =>
+            confirmAction(`Delete "${prop.title}"?`, () =>
+              deleteProperty(prop.id)
+            );
+          btnToggle.onclick = () => togglePropertyStatus(prop.id);
+
+          grid.appendChild(node);
+        });
+      }
+
+      /* Render requests */
+      function renderRequests() {
+        const list = $("requests-list");
+        list.innerHTML = "";
+        if (requests.length === 0) {
+          list.innerHTML =
+            '<div class="text-sm text-gray-500">No requests yet.</div>';
+          return;
+        }
+        requests.forEach((r) => {
+          const card = document.createElement("div");
+          card.className =
+            "p-4 bg-white rounded-lg border shadow-sm flex justify-between items-start";
+          card.innerHTML = `
+          <div>
+            <div class="font-semibold">${r.tenantName}</div>
+            <div class="text-sm text-gray-500">${getPropertyTitle(
+              r.propertyId
+            )}</div>
+            <div class="text-sm mt-2">${r.message}</div>
+            <div class="text-sm text-gray-500 mt-2">Requested: ${
+              r.visitDate
+            } · ${r.visitTime}</div>
+          </div>
+          <div class="flex flex-col gap-2">
+            <button class="px-3 py-1 bg-green-600 text-white rounded" data-id="${
+              r.requestId
+            }" onclick="approveRequest('${r.requestId}')">Approve</button>
+            <button class="px-3 py-1 bg-red-600 text-white rounded" onclick="confirmAction('Reject this request?', ()=>rejectRequest('${
+              r.requestId
+            }'))">Reject</button>
+          </div>
+        `;
+          list.appendChild(card);
+        });
+      }
+
+      /* Render visits schedule */
+      function renderVisits() {
+        const list = $("visits-list");
+        list.innerHTML = "";
+        if (visits.length === 0) {
+          list.innerHTML =
+            '<div class="text-sm text-gray-500">No visits scheduled.</div>';
+          return;
+        }
+        visits.forEach((v) => {
+          const el = document.createElement("div");
+          el.className =
+            "p-4 bg-white rounded-lg border flex justify-between items-center";
+          el.innerHTML = `
+          <div>
+            <div class="font-semibold">${v.tenantName} · ${getPropertyTitle(
+            v.propertyId
+          )}</div>
+            <div class="text-sm text-gray-500">When: ${v.scheduledAt}</div>
+          </div>
+          <div class="flex gap-2">
+            <button class="px-3 py-1 border rounded" onclick="rescheduleVisit('${
+              v.visitId
+            }')">Reschedule</button>
+            <button class="px-3 py-1 bg-green-600 text-white rounded" onclick="markVisitDone('${
+              v.visitId
+            }')">Mark Done</button>
+            <button class="px-3 py-1 bg-red-600 text-white rounded" onclick="confirmAction('Cancel this visit?', ()=>cancelVisit('${
+              v.visitId
+            }'))">Cancel</button>
+          </div>
+        `;
+          list.appendChild(el);
+        });
+      }
+
+      /* Top properties list for analytics */
+      function renderTopProperties() {
+        const ul = $("top-properties");
+        ul.innerHTML = "";
+        const sorted = properties
+          .slice()
+          .sort((a, b) => b.views - a.views)
+          .slice(0, 5);
+        sorted.forEach((p) => {
+          const li = document.createElement("li");
+          li.className = "text-sm text-gray-700 mb-2";
+          li.innerText = `${p.title} — ${p.views} views`;
+          ul.appendChild(li);
+        });
+      }
+
+      /* ------------------------------
+       Actions
+    ------------------------------*/
+      function openAddModal() {
+        $("modalAdd").classList.remove("hidden");
+        $("modalAdd").classList.add("flex");
+      }
+      function closeAddModal() {
+        $("modalAdd").classList.add("hidden");
+        $("modalAdd").classList.remove("flex");
+      }
+      function submitAddProperty() {
+        const title = $("p_title").value.trim();
+        const cat = $("p_category").value;
+        const price = Number($("p_price").value);
+        const loc = $("p_location").value.trim();
+        const img =
+          $("p_image").value.trim() ||
+          "https://source.unsplash.com/600x400/?room";
+        const desc = $("p_description").value.trim();
+
+        const id = "P" + (properties.length + 1);
+        properties.push({
+          id,
+          title,
+          category: cat,
+          price,
+          location: loc,
+          img,
+          description: desc,
+          status: "available",
+          views: 0,
+        });
+        closeAddModal();
+        renderAll();
+        showToast("Property added successfully");
+        $("formAdd").reset();
+      }
+
+      function openEditProperty(id) {
+        const p = properties.find((x) => x.id === id);
+        if (!p) return;
+        // fill form for edit (reusing add modal for simplicity)
+        $("p_title").value = p.title;
+        $("p_category").value = p.category;
+        $("p_price").value = p.price;
+        $("p_location").value = p.location;
+        $("p_image").value = p.img;
+        $("p_description").value = p.description || "";
+        openAddModal();
+        // remove original on submit then re-add with same id
+        // For demo simplicity we will delete original and add new on submit:
+        // In real app implement edit mode toggling.
+        confirmAction(
+          "Saving will update existing property. Proceed?",
+          () => {
+            // We'll simulate overwrite by removing then submitting
+            deleteProperty(id, false);
+          },
+          false
+        );
+      }
+
+      function deleteProperty(id, confirmMsg = true) {
+        const idx = properties.findIndex((x) => x.id === id);
+        if (idx === -1) return;
+        properties.splice(idx, 1);
+        renderAll();
+        showToast("Property deleted");
+      }
+
+      function togglePropertyStatus(id) {
+        const p = properties.find((x) => x.id === id);
+        if (!p) return;
+        p.status = p.status === "available" ? "booked" : "available";
+        renderAll();
+        showToast("Status updated");
+      }
+
+      function approveRequest(rid) {
+        const r = requests.find((x) => x.requestId === rid);
+        if (!r) return;
+        // create visit
+        const vid = "V" + (visits.length + 1);
+        const scheduledAt = `${r.visitDate} ${r.visitTime}`;
+        visits.push({
+          visitId: vid,
+          propertyId: r.propertyId,
+          tenantName: r.tenantName,
+          scheduledAt,
+          status: "scheduled",
+        });
+        r.status = "approved";
+        renderAll();
+        showToast("Request approved & visit scheduled");
+      }
+
+      function rejectRequest(rid) {
+        const idx = requests.findIndex((x) => x.requestId === rid);
+        if (idx > -1) requests.splice(idx, 1);
+        renderAll();
+        showToast("Request rejected");
+      }
+
+      function rescheduleVisit(vid) {
+        const v = visits.find((x) => x.visitId === vid);
+        if (!v) return;
+        const newTime = prompt(
+          "Enter new date & time (e.g. 2025-05-26 3:00 PM):",
+          v.scheduledAt
+        );
+        if (newTime) {
+          v.scheduledAt = newTime;
+          renderAll();
+          showToast("Visit rescheduled");
+        }
+      }
+
+      function cancelVisit(vid) {
+        const idx = visits.findIndex((x) => x.visitId === vid);
+        if (idx > -1) visits.splice(idx, 1);
+        renderAll();
+        showToast("Visit cancelled");
+      }
+
+      function markVisitDone(vid) {
+        const v = visits.find((x) => x.visitId === vid);
+        if (!v) return;
+        v.status = "completed";
+        renderAll();
+        showToast("Marked as completed");
+      }
+
+      /* Confirm dialog helpers */
+      let confirmCallback = null;
+      function confirmAction(message, cb, show = true) {
+        confirmCallback = cb;
+        $("confirmMessage").innerText = message;
+        $("modalConfirm").classList.remove("hidden");
+        $("modalConfirm").classList.add("flex");
+      }
+      function hideConfirm() {
+        $("modalConfirm").classList.add("hidden");
+        $("modalConfirm").classList.remove("flex");
+        confirmCallback = null;
+      }
+      function confirmAccept() {
+        if (confirmCallback) confirmCallback();
+        hideConfirm();
+      }
+
+      /* small toast */
+      function showToast(msg) {
+        const t = document.createElement("div");
+        t.className =
+          "fixed right-6 bottom-6 bg-black text-white px-4 py-2 rounded shadow";
+        t.innerText = msg;
+        document.body.appendChild(t);
+        setTimeout(() => {
+          t.remove();
+        }, 2600);
+      }
+
+      function saveSettings() {
+        showToast("Settings saved (demo)");
+      }
+      function resetSettings() {
+        $("ownerBusiness").value = "";
+        $("ownerPhone").value = "";
+        showToast("Reset");
+      }
+
+      /* renderAll */
+      function renderAll() {
+        renderStats();
+        renderRecentActivity();
+        renderProperties();
+        renderRequests();
+        renderVisits();
+        renderTopProperties();
+      }
+
+      /* Event bindings */
+      document.addEventListener("DOMContentLoaded", function () {
+        // initial render
+        renderAll();
+        // show overview initially
+        showSection("overview");
+
+        // bind modal buttons
+        $("btnAddProperty").addEventListener("click", openAddModal);
+        $("quickAdd").addEventListener("click", openAddModal);
+        $("nav-overview")?.addEventListener("click", () =>
+          showSection("overview")
+        );
+        $("nav-properties")?.addEventListener("click", () =>
+          showSection("properties")
+        );
+        $("nav-requests")?.addEventListener("click", () =>
+          showSection("requests")
+        );
+        $("nav-schedule")?.addEventListener("click", () =>
+          showSection("schedule")
+        );
+        $("nav-analytics")?.addEventListener("click", () =>
+          showSection("analytics")
+        );
+        $("nav-settings")?.addEventListener("click", () =>
+          showSection("settings")
+        );
+
+        // click outside modal to close (optional)
+        document
+          .getElementById("modalAdd")
+          .addEventListener("click", function (e) {
+            if (e.target === this) closeAddModal();
+          });
+        document
+          .getElementById("modalConfirm")
+          .addEventListener("click", function (e) {
+            if (e.target === this) hideConfirm();
+          });
+
+        // handle form reset on modal close
+        // already using form reset after submit
+      });
+    </script>
+  </body>
+</html>
